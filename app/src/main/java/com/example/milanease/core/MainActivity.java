@@ -1,10 +1,16 @@
 package com.example.milanease.core;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import com.example.milanease.core.ui.Bills.BillsFragment;
+import com.example.milanease.core.ui.dashboard.DashboardFragment;
+import com.example.milanease.core.ui.providers.ProvidersFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,15 +24,39 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.tab_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.tab_dashboard, R.id.tab_bills, R.id.tab_providers, R.id.tab_more)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+
+        BottomNavigationView bottomNav = findViewById(R.id.tab_view);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
+                    new DashboardFragment()).commit();
+        }
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
+
+                    switch (item.getItemId()) {
+                        case R.id.tab_bills:
+                            selectedFragment = new BillsFragment();
+                            break;
+                        case R.id.tab_providers:
+                            selectedFragment = new ProvidersFragment();
+                            break;
+                        case R.id.tab_dashboard:
+                            selectedFragment = new DashboardFragment();
+                            break;
+                    }
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
+                            selectedFragment).commit();
+
+                    return true;
+                }
+            };
 
 }
