@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tab_dashboard"
+        android:icon="@drawable/ic_dashboard_24dp"
+        android:title="@string/dashboard_tab"
+        android:titleCondensed="@string/dashboard_tab"
+        />
+
+    <item
+        android:id="@+id/tab_bills"
+        android:icon="@drawable/ic_bills_24dp"
+        android:title="@string/bills_tab"
+        android:titleCondensed="@string/bills_tab"
+        />
+
+    <item
+        android:id="@+id/tab_providers"
+        android:icon="@drawable/ic_providers_24dp"
+        android:title="@string/providers_tab"
+        android:titleCondensed="@string/providers_tab"
+        />
+
+    <item
+        android:id="@+id/tab_more"
+        android:icon="@drawable/ic_more_24dp"
+        android:title="@string/more_tab"
+        android:titleCondensed="@string/more_tab"
+        />
+
+</menu>
