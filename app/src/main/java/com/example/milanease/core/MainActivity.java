@@ -20,6 +20,11 @@ import com.example.milanease.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Bundle dashboardInstance = null;
+    private Bundle billsInstance = null;
+    private Bundle providersInstance = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +43,14 @@ public class MainActivity extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
+
                     Fragment selectedFragment = null;
 
                     switch (item.getItemId()) {
                         case R.id.tab_bills:
+
                             selectedFragment = new BillsFragment();
                             break;
                         case R.id.tab_providers:
