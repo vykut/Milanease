@@ -1,9 +1,11 @@
 package com.example.milanease.core.ui.dashboard;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -17,6 +19,10 @@ import com.example.milanease.R;
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
+    private SegmentedControl segmentedControl;
+    private Button waterButton;
+    private Button electricityButton;
+    private Button gasButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +36,41 @@ public class DashboardFragment extends Fragment {
 //                textView.setText(s);
             }
         });
+
+        initComponents(root);
+
         return root;
+    }
+
+    private void initComponents(View view) {
+
+        segmentedControl = view.findViewById(R.id.dashboard_segmented_control);
+//        waterButton = view.findViewById(R.id.water_button);
+//        gasButton = view.findViewById(R.id.gas_button);
+//        electricityButton = view.findViewById(R.id.water_button);
+
+//        waterButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                segmentedControl.toggleUtility(Utility.water);
+//            }
+//        });
+//
+//        gasButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                segmentedControl.toggleUtility(Utility.gas);
+//            }
+//        });
+//
+//        electricityButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                segmentedControl.toggleUtility(Utility.electricity);
+//            }
+//        });
+
+
+
     }
 }

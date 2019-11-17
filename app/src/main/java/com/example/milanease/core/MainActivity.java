@@ -2,6 +2,7 @@ package com.example.milanease.core;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.milanease.core.ui.Bills.BillsFragment;
 import com.example.milanease.core.ui.dashboard.DashboardFragment;
@@ -20,9 +21,13 @@ import com.example.milanease.R;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    //maybe save instance of every tab
     private Bundle dashboardInstance = null;
     private Bundle billsInstance = null;
     private Bundle providersInstance = null;
+
+    private Fragment selectedFragment = null;
 
 
     @Override
@@ -34,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         if (savedInstanceState == null) {
+            selectedFragment = new DashboardFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
-                    new DashboardFragment()).commit();
+                    selectedFragment).commit();
         }
     }
 
@@ -44,13 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-
-
-                    Fragment selectedFragment = null;
-
                     switch (item.getItemId()) {
                         case R.id.tab_bills:
-
                             selectedFragment = new BillsFragment();
                             break;
                         case R.id.tab_providers:

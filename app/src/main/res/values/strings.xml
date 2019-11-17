@@ -20,4 +20,6 @@
     <string name="electricity">Electricity</string>
     <string name="gas">Gas</string>
     <string name="water">Water</string>
+    <string name="today">Today</string>
+    <string name="last_updated">updated 15 mins ago</string>
 </resources>

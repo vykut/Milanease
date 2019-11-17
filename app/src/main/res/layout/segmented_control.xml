@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/water_button"
-        style="@style/Widget.AppCompat.Button"
+
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/btn_border"
@@ -17,11 +17,13 @@
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.333" />
+        app:layout_constraintWidth_percent="0.333"
+        />
+<!--        style="@style/Widget.AppCompat.Button"-->
 
     <Button
         android:id="@+id/gas_button"
-        style="@style/Widget.AppCompat.Button.Borderless"
+
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/btn_border"
@@ -29,11 +31,13 @@
         android:textAllCaps="false"
         app:layout_constraintStart_toEndOf="@+id/water_button"
         app:layout_constraintTop_toTopOf="@+id/water_button"
-        app:layout_constraintWidth_percent="0.333" />
+        app:layout_constraintWidth_percent="0.333"/>
+<!--        style="@style/Widget.AppCompat.Button.Borderless"-->
+
 
     <Button
         android:id="@+id/electricity_button"
-        style="@style/Widget.AppCompat.Button.Borderless"
+
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:background="@drawable/btn_border"
@@ -41,6 +45,8 @@
         android:textAllCaps="false"
         app:layout_constraintStart_toEndOf="@+id/gas_button"
         app:layout_constraintTop_toTopOf="@+id/gas_button"
-        app:layout_constraintWidth_percent="0.333" />
+        app:layout_constraintWidth_percent="0.333"
+        />
+<!--        style="@style/Widget.AppCompat.Button.Borderless"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
