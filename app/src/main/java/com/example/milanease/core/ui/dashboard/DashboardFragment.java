@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.milanease.R;
+import com.example.milanease.core.MainActivity;
 
 public class DashboardFragment extends Fragment {
 
@@ -23,6 +24,8 @@ public class DashboardFragment extends Fragment {
     private Button waterButton;
     private Button electricityButton;
     private Button gasButton;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +41,9 @@ public class DashboardFragment extends Fragment {
         });
 
         initComponents(root);
+
+
+
 
         return root;
     }
