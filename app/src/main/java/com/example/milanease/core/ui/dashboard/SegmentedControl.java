@@ -48,6 +48,7 @@ public class SegmentedControl extends ConstraintLayout {
         gas = findViewById(R.id.gas_button);
         electricity = findViewById(R.id.electricity_button);
 
+
         gas.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +62,8 @@ public class SegmentedControl extends ConstraintLayout {
                 toggleUtility(Utility.water);
             }
         });
+
+        water.performClick();
 
         electricity.setOnClickListener(new OnClickListener() {
             @Override

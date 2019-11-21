@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.tab_view);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
+        reloadInstance(savedInstanceState);
+    }
+
+    private void reloadInstance(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             selectedFragment = new DashboardFragment();
             setActionBarTitle("Dashboard");
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
 
-                    getSupportFragmentManager().beginTransaction().addToBackStack("").replace(R.id.nav_host_fragment,
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
                             selectedFragment).commit();
 
                     return true;

@@ -1,43 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <ScrollView
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:fillViewport="true"
-        >
+    android:layout_height="match_parent">
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFFFFF"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/dashboard_segmented_control"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-            <com.example.milanease.core.ui.dashboard.SegmentedControl
-                android:id="@+id/dashboard_segmented_control"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintVertical_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintWidth_percent="1">
-
-            </com.example.milanease.core.ui.dashboard.SegmentedControl>
+            android:orientation="vertical">
 
             <com.example.milanease.core.ui.dashboard.TodayUsage
+                android:id="@+id/todayUsage"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/todayVsYesterday"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/todayVsYesterday" />
+
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
@@ -46,6 +44,42 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.5" />
 
+            <com.example.milanease.core.ui.dashboard.TodayVsYesterday
+                android:id="@+id/todayVsYesterday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.milanease.core.ui.dashboard.CostComparison
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/todayVsYesterday"
+                app:layout_constraintStart_toStartOf="@+id/todayUsage"
+                app:layout_constraintTop_toBottomOf="@+id/todayVsYesterday"
+                app:layout_constraintVertical_bias="0.0" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     </ScrollView>
+
+    <com.example.milanease.core.ui.dashboard.SegmentedControl
+        android:id="@+id/dashboard_segmented_control"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
