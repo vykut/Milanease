@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -15,10 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milanease.R;
 
-public class ProvidersFragment extends Fragment {
+public class ProvidersFragment extends Fragment implements ProviderInterface {
 
     private ProvidersViewModel providersViewModel;
     private RecyclerView providersRecyclerView;
+    ProviderAdapter providerAdapter;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -34,14 +36,25 @@ public class ProvidersFragment extends Fragment {
 
     private void initComponents(View root) {
 
-
         providersRecyclerView = root.findViewById(R.id.provider_recycler_view);
 
         providersRecyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
-        providersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        providerAdapter = new ProviderAdapter(providersViewModel.getProviders().getValue(), getContext());
+        providerAdapter.setDelegate(this);
+        providersRecyclerView.setAdapter(providerAdapter);
 
-        providersRecyclerView.setAdapter(new ProviderAdapter(providersViewModel.getProviders().getValue()));
+        providersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Override
+    public void providerClicked(Provider provider) {
+        Toast.makeText(getContext(), provider.getName(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        providerAdapter.setDelegate(null);
+        super.onDestroy();
     }
 }

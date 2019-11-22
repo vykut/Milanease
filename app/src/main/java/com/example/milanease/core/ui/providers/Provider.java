@@ -2,6 +2,7 @@ package com.example.milanease.core.ui.providers;
 
 import android.media.Image;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.milanease.R;
@@ -54,8 +55,21 @@ public class Provider implements Comparable<Provider> {
 
     }
 
+    public Provider() {
+        name = "";
+        utilities = null;
+        logoResID = 0;
+        phone = "";
+        description = "";
+        contract = null;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Utility> getUtilities() {
@@ -82,8 +96,17 @@ public class Provider implements Comparable<Provider> {
     @Override
     public int compareTo(Provider o) {
         if (this.contract == null)
-            return -1;
-        return 1;
+            return 1;
+        return -1;
 
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        if (contract == null) {
+            return "null contract";
+        }
+        return "non-null contract";
     }
 }
