@@ -46,4 +46,21 @@ public class TodayVsYesterday extends CardView {
         interpretation = findViewById(R.id.interpretation);
     }
 
+    public void setPercentage(Double percentage) {
+        this.percentage.setText(percentage.toString());
+    }
+
+    public void setUpDown(boolean up) {
+
+        if (up) {
+            upDown.setImageResource(R.drawable.up_24dp);
+        } else {
+            upDown.setImageResource(R.drawable.down_24dp);
+        }
+    }
+
+    public void setInterpretation(String interpretation) {
+        this.interpretation.setText(interpretation);
+    }
+
 }

@@ -4,16 +4,31 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BillsViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<List<Bill>> bills_live_data;
+    private List<Bill> bills_list;
 
     public BillsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is bills fragment");
+        bills_live_data = new MutableLiveData<>();
+
+        initDefaultBills();
+
+        bills_live_data.setValue(bills_list);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    private void initDefaultBills() {
+        bills_list = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            bills_list.add(new Bill());
+        }
+    }
+
+    public LiveData<List<Bill>> getBills() {
+        return bills_live_data;
     }
 }

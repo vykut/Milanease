@@ -40,4 +40,12 @@ public class CostComparison extends CardView {
         finalUsage = findViewById(R.id.final_usage);
         finalCost = findViewById(R.id.final_cost);
     }
+
+    public void setFinalUsage(Double usage) {
+        this.finalUsage.setText(usage.toString());
+    }
+
+    public void setFinalCost(String finalCost) {
+        this.finalCost.setText(finalCost);
+    }
 }

@@ -18,14 +18,17 @@ import androidx.navigation.Navigation;
 
 import com.example.milanease.R;
 import com.example.milanease.core.MainActivity;
+import com.example.milanease.core.ui.SegmentedControlInterface;
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements SegmentedControlInterface {
 
     private DashboardViewModel dashboardViewModel;
     private SegmentedControl segmentedControl;
     private Button waterButton;
     private Button electricityButton;
     private Button gasButton;
+    private TodayUsage todayUsage;
+    private TodayVsYesterday todayVsYesterday;
 
     private NavController navController;
 
@@ -57,34 +60,15 @@ public class DashboardFragment extends Fragment {
     }
 
     private void initComponents(View view) {
-
         segmentedControl = view.findViewById(R.id.dashboard_segmented_control);
-//        waterButton = view.findViewById(R.id.water_button);
-//        gasButton = view.findViewById(R.id.gas_button);
-//        electricityButton = view.findViewById(R.id.water_button);
+        segmentedControl.setDelegate(this);
+        todayUsage = view.findViewById(R.id.today_usage);
+        todayVsYesterday = view.findViewById(R.id.today_vs_yesterday);
 
-//        waterButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                segmentedControl.toggleUtility(Utility.water);
-//            }
-//        });
-//
-//        gasButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                segmentedControl.toggleUtility(Utility.gas);
-//            }
-//        });
-//
-//        electricityButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                segmentedControl.toggleUtility(Utility.electricity);
-//            }
-//        });
+    }
 
-
-
+    @Override
+    public void stateChanged() {
+        // to implement
     }
 }

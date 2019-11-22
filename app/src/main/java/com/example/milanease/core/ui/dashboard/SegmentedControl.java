@@ -7,11 +7,13 @@ import android.net.sip.SipSession;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.milanease.R;
+import com.example.milanease.core.ui.SegmentedControlInterface;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -20,6 +22,12 @@ public class SegmentedControl extends ConstraintLayout {
     private Button water;
     private Button gas;
     private Button electricity;
+    private Utility state;
+    @Nullable private SegmentedControlInterface delegate;
+
+    public void setDelegate(SegmentedControlInterface delegate) {
+        this.delegate = delegate;
+    }
 
     public SegmentedControl(Context context) {
         super(context);
@@ -63,12 +71,12 @@ public class SegmentedControl extends ConstraintLayout {
             }
         });
 
+        //default button
         water.performClick();
 
         electricity.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-                toggleUtility(Utility.electricity);
+            public void onClick(View v) { toggleUtility(Utility.electricity);
             }
         });
     }
@@ -78,28 +86,39 @@ public class SegmentedControl extends ConstraintLayout {
             case water: {
                 water.setTextColor(Color.WHITE);
                 water.setBackgroundResource(R.drawable.btn_border_selected);
+                state = Utility.water;
+
                 toggleButton(Utility.gas);
                 toggleButton(Utility.electricity);
+
                 // logic for each fragment
                 break;
             }
             case gas: {
                 gas.setTextColor(Color.WHITE);
                 gas.setBackgroundResource(R.drawable.btn_border_selected);
+                state = Utility.gas;
+
                 toggleButton(Utility.water);
                 toggleButton(Utility.electricity);
+
                 // logic for each fragment
                 break;
             }
             case electricity: {
                 electricity.setTextColor(Color.WHITE);
                 electricity.setBackgroundResource(R.drawable.btn_border_selected);
+                state = Utility.electricity;
+
                 toggleButton(Utility.gas);
                 toggleButton(Utility.water);
+
                 // logic for each fragment
                 break;
             }
-
+        }
+        if(delegate != null) {
+            delegate.stateChanged();
         }
     }
 
@@ -122,5 +141,9 @@ public class SegmentedControl extends ConstraintLayout {
             }
 
         }
+    }
+
+    public Utility getState() {
+        return state;
     }
 }

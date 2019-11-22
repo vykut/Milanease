@@ -40,4 +40,12 @@ public class TodayUsage extends CardView {
         todayQuantity = findViewById(R.id.today_quantity_used);
         todayMeasureUnit = findViewById(R.id.today_unit_of_measure);
     }
+
+    public void setTodayQuantity(Double todayQuantity) {
+        this.todayQuantity.setText(todayQuantity.toString());
+    }
+
+    public void setTodayMeasureUnit(String measureUnit) {
+        this.todayMeasureUnit.setText(measureUnit);
+    }
 }
