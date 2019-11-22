@@ -13,23 +13,23 @@ import com.example.milanease.R;
 
 
 
-public class TodayVsYesterday extends CardView {
+public class TodayVsYesterdayUsage extends CardView {
 
     private TextView percentage;
     private ImageView upDown;
     private TextView interpretation;
 
-    public TodayVsYesterday(@NonNull Context context) {
+    public TodayVsYesterdayUsage(@NonNull Context context) {
         super(context);
         init(context);
     }
 
-    public TodayVsYesterday(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public TodayVsYesterdayUsage(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public TodayVsYesterday(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public TodayVsYesterdayUsage(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }

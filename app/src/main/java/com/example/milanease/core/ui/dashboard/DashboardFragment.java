@@ -1,12 +1,10 @@
 package com.example.milanease.core.ui.dashboard;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -17,7 +15,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.milanease.R;
-import com.example.milanease.core.MainActivity;
 import com.example.milanease.core.ui.SegmentedControlInterface;
 
 public class DashboardFragment extends Fragment implements SegmentedControlInterface {
@@ -28,7 +25,7 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
     private Button electricityButton;
     private Button gasButton;
     private TodayUsage todayUsage;
-    private TodayVsYesterday todayVsYesterday;
+    private TodayVsYesterdayUsage todayVsYesterdayUsage;
 
     private NavController navController;
 
@@ -63,7 +60,7 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
         segmentedControl = view.findViewById(R.id.dashboard_segmented_control);
         segmentedControl.setDelegate(this);
         todayUsage = view.findViewById(R.id.today_usage);
-        todayVsYesterday = view.findViewById(R.id.today_vs_yesterday);
+        todayVsYesterdayUsage = view.findViewById(R.id.today_vs_yesterday);
 
     }
 

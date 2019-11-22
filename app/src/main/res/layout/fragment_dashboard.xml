@@ -44,7 +44,7 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.5" />
 
-            <com.example.milanease.core.ui.dashboard.TodayVsYesterday
+            <com.example.milanease.core.ui.dashboard.TodayVsYesterdayUsage
                 android:id="@+id/today_vs_yesterday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
