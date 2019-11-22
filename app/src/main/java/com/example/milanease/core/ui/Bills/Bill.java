@@ -15,7 +15,7 @@ public class Bill {
         this.period = "Jan - Mar";
         this.quantity = 550;
         this.quantityExchanged = 2325;
-        this.utility = Utility.water;
+        this.utility = Utility.random();
     }
 
     public double getPrice() {
@@ -36,7 +36,7 @@ public class Bill {
 
     public String displayQuantity() {
         switch (utility) {
-            case electricity: { return quantity + "GWh"; }
+            case electricity: { return quantity + "kW"; }
             case water: { return quantity + "L"; }
             case gas: { return quantity + "Smc";}
             default: { return "Bill.displayQuantity() - default switch"; }

@@ -38,18 +38,19 @@ public class BillsFragment extends Fragment implements SegmentedControlInterface
         return root;
     }
 
-    private void initComponents(View view) {
+    private void initComponents(View root) {
         billsViewModel =
                 ViewModelProviders.of(this).get(BillsViewModel.class);
-        segmentedControl = view.findViewById(R.id.bills_segmented_control);
+        segmentedControl = root.findViewById(R.id.bills_segmented_control);
         segmentedControl.setDelegate(this);
 
         bills_adapter = initAdapter();
 
-        bills_pager = view.findViewById(R.id.pager_bills);
+        bills_pager = root.findViewById(R.id.pager_bills);
         bills_pager.setAdapter(bills_adapter);
         bills_pager.setOffscreenPageLimit(bills_adapter.getCount());
-//        bills_pager.setPageMargin(-400);
+//        bills_pager.setPageMargin(-75);
+//        bills_pager.setPageMargin(-getResources().getConfiguration().screenWidthDp);
     }
 
     @Override

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -39,7 +41,6 @@ public class BillPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-//        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.bill_card, container, false);
         initCard(view, position);
         container.addView(view, 0);
@@ -51,12 +52,21 @@ public class BillPagerAdapter extends PagerAdapter {
         TextView period = view.findViewById(R.id.period);
         TextView totalUsage = view.findViewById(R.id.total_usage);
         TextView totalUsageExchanged = view.findViewById(R.id.total_usage_exchanged);
-        Bill bill = bills.get(position);
+        Button btnDownload = view.findViewById(R.id.btn_download);
+        final Bill bill = bills.get(position);
 
         totalCost.setText(bill.displayPrice());
         period.setText(bill.getPeriod());
         totalUsage.setText(bill.displayQuantity());
         totalUsageExchanged.setText(bill.displayQuantityExchanged());
+
+        btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // to be implemented
+                Toast.makeText(context, bill.displayPrice(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
