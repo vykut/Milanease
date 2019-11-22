@@ -2,7 +2,6 @@ package com.example.milanease.core.ui.Bills;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,11 +14,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.milanease.R;
 import com.example.milanease.core.ui.SegmentedControlInterface;
 import com.example.milanease.core.ui.dashboard.SegmentedControl;
-import com.example.milanease.core.ui.dashboard.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BillsFragment extends Fragment implements SegmentedControlInterface {
 
