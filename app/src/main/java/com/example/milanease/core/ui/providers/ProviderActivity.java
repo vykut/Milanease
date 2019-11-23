@@ -57,7 +57,9 @@ public class ProviderActivity extends AppCompatActivity {
         btnMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                intent.putExtra(ProvidersFragment.PROVIDER, provider);
+                startActivity(intent);
             }
         });
 
