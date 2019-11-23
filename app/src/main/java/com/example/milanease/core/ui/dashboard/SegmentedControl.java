@@ -143,6 +143,12 @@ public class SegmentedControl extends ConstraintLayout {
         }
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        delegate = null;
+        super.finalize();
+    }
+
     public Utility getState() {
         return state;
     }

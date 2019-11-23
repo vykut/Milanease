@@ -39,15 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        try {
-//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//            getSupportActionBar().hide();
-//        } catch (Throwable err) {
-//            Toast.makeText(getApplicationContext(), err.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-//        }
-
-
-
         BottomNavigationView bottomNav = findViewById(R.id.tab_view);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 

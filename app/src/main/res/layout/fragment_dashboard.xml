@@ -34,7 +34,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/today_vs_yesterday"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/today_vs_yesterday" />
+                app:layout_constraintTop_toTopOf="@+id/today_vs_yesterday"
+                />
 
 
             <androidx.constraintlayout.widget.Guideline

@@ -1,6 +1,8 @@
 package com.example.milanease.core.ui.providers;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,8 @@ public class ProvidersFragment extends Fragment implements ProviderInterface {
     private ProvidersViewModel providersViewModel;
     private RecyclerView providersRecyclerView;
     ProviderAdapter providerAdapter;
+
+    public static String PROVIDER = "Provider";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,7 +53,10 @@ public class ProvidersFragment extends Fragment implements ProviderInterface {
 
     @Override
     public void providerClicked(Provider provider) {
-        Toast.makeText(getContext(), provider.getName(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), provider.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), ProviderActivity.class);
+        intent.putExtra(PROVIDER, provider);
+        startActivity(intent);
     }
 
     @Override

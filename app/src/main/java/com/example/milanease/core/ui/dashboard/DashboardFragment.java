@@ -65,6 +65,12 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
     }
 
     @Override
+    public void onDestroy() {
+        segmentedControl.setDelegate(null);
+        super.onDestroy();
+    }
+
+    @Override
     public void stateChanged() {
         // to implement
     }

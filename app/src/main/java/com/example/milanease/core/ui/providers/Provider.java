@@ -1,6 +1,8 @@
 package com.example.milanease.core.ui.providers;
 
 import android.media.Image;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,7 +13,7 @@ import com.example.milanease.core.ui.dashboard.Utility;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Provider implements Comparable<Provider> {
+public class Provider implements Comparable<Provider>, Parcelable {
 
     private String name;
     private List<Utility> utilities;
@@ -44,7 +46,7 @@ public class Provider implements Comparable<Provider> {
         utilities.add(Utility.electricity);
 
         this.utilities = utilities;
-        this.logoResID = R.drawable.enel;
+        this.logoResID = R.drawable.ic_enel_logo;
         this.phone = "0800070809";
         this.description = "În România, Grupul Enel deserveşte 2,8 milioane de clienţi prin reţeaua sa de furnizare şi distribuţie, iar Enel Green Power deţine şi operează centrale de producţie a energiei din surse regenerabile.";
         if(contract) {
@@ -63,6 +65,27 @@ public class Provider implements Comparable<Provider> {
         description = "";
         contract = null;
     }
+
+    public Provider(Parcel in) {
+        name = in.readString();
+        utilities = in.readArrayList(Utility.class.getClassLoader());
+        logoResID = in.readInt();
+        phone = in.readString();
+        description = in.readString();
+        contract = in.readParcelable(Contract.class.getClassLoader());
+    }
+
+    public static final Creator<Provider> CREATOR = new Creator<Provider>() {
+        @Override
+        public Provider createFromParcel(Parcel in) {
+            return new Provider(in);
+        }
+
+        @Override
+        public Provider[] newArray(int size) {
+            return new Provider[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -101,12 +124,39 @@ public class Provider implements Comparable<Provider> {
 
     }
 
-    @NonNull
+//    @NonNull
+//    @Override
+//    public String toString() {
+//        if (contract == null) {
+//            return "null contract";
+//        }
+//        return "non-null contract";
+//    }
+
     @Override
     public String toString() {
-        if (contract == null) {
-            return "null contract";
-        }
-        return "non-null contract";
+        return "Provider{" +
+                "name='" + name + '\'' +
+                ", utilities=" + utilities +
+                ", logoResID=" + logoResID +
+                ", phone='" + phone + '\'' +
+                ", description='" + description + '\'' +
+                ", contract=" + contract +
+                '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeList(utilities);
+        dest.writeInt(logoResID);
+        dest.writeString(phone);
+        dest.writeString(description);
+        dest.writeParcelable(contract, 0);
     }
 }

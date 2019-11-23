@@ -31,11 +31,12 @@
         android:id="@+id/activity_provider_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="center"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_enel_logo"
         tools:srcCompat="@drawable/ic_enel_logo" />
 
     <View
@@ -59,6 +60,7 @@
         android:textColor="#000000"
         android:textSize="32sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -86,6 +88,7 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/activity_provider_btn_message"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/phone_24dp"
             tools:src="@drawable/phone_24dp" />
 
         <ImageButton
@@ -98,7 +101,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/message_24dp" />
+            tools:src="@drawable/message_24dp"
+            app:srcCompat="@drawable/message_24dp"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
@@ -118,6 +122,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:cardCornerRadius="15dp"
+        app:cardElevation="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -140,7 +145,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
@@ -178,23 +183,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="8dp"
                 android:text="Enel Family"
                 android:textColor="#FFFFFF"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageButton
                 android:id="@+id/activity_provider_contract_btn"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/btn_download"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
