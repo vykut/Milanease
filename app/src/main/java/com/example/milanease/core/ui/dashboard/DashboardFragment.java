@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.example.milanease.R;
 import com.example.milanease.core.ui.SegmentedControlInterface;
@@ -26,8 +24,6 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
     private Button gasButton;
     private TodayUsage todayUsage;
     private TodayVsYesterdayUsage todayVsYesterdayUsage;
-
-    private NavController navController;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +49,6 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        navController = Navigation.findNavController(view);
     }
 
     private void initComponents(View view) {

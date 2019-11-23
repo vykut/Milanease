@@ -1,14 +1,15 @@
 package com.example.milanease.core.ui.providers;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.milanease.R;
 
@@ -28,12 +29,10 @@ public class ProviderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider);
 
-        initComponents();
-
         Intent intent = getIntent();
         provider = intent.getParcelableExtra(ProvidersFragment.PROVIDER);
 
-        setActionBarTitle(provider.getName());
+        initComponents();
 
         initProviderUI();
     }
@@ -69,10 +68,12 @@ public class ProviderActivity extends AppCompatActivity {
 
             }
         });
+
+        setActionBarTitle(provider.getName());
     }
 
     private void initProviderUI() {
-        logo.setImageResource(provider.getLogo());
+        logo.setImageResource(provider.getLogoLarge());
 
         name.setText(provider.getName());
         description.setText(provider.getDescription());
@@ -83,6 +84,18 @@ public class ProviderActivity extends AppCompatActivity {
             contractName.setText("Add a contract now");
             btnContract.setImageResource(R.drawable.add_24dp);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = NavUtils.getParentActivityIntent(this);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                NavUtils.navigateUpTo(this, intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void setActionBarTitle(String title) {

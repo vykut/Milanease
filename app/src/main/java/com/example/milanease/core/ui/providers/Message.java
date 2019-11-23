@@ -37,11 +37,6 @@ public class Message implements Parcelable, Comparable<Message> {
         state = MessageState.valueOf(in.readString());
     }
 
-    public void deleteMessage() {
-        message = "";
-        state = MessageState.deleted;
-    }
-
     public String getMessage() {
         return message;
     }

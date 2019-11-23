@@ -1,10 +1,8 @@
 package com.example.milanease.core.ui.providers;
 
-import android.media.Image;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.milanease.R;
@@ -17,23 +15,27 @@ public class Provider implements Comparable<Provider>, Parcelable {
 
     private String name;
     private List<Utility> utilities;
-    private int logoResID;
+    private int logoLarge;
+    private int logoSmall;
     private String phone;
     private String description;
     @Nullable private Contract contract;
 
-    public Provider(String name, List<Utility> utilities, int logoResID, String phone, String description) {
+    public Provider(String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description) {
         this.name = name;
         this.utilities = utilities;
-        this.logoResID = logoResID;
+        this.logoLarge = logoLarge;
+        this.logoSmall = logoSmall;
         this.phone = phone;
         this.description = description;
+        contract = null;
     }
 
-    public Provider(String name, List<Utility> utilities, int logoResID, String phone, String description, @Nullable Contract contract) {
+    public Provider(String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description, @Nullable Contract contract) {
         this.name = name;
         this.utilities = utilities;
-        this.logoResID = logoResID;
+        this.logoLarge = logoLarge;
+        this.logoSmall = logoSmall;
         this.phone = phone;
         this.description = description;
         this.contract = contract;
@@ -46,7 +48,8 @@ public class Provider implements Comparable<Provider>, Parcelable {
         utilities.add(Utility.electricity);
 
         this.utilities = utilities;
-        this.logoResID = R.drawable.ic_enel_logo;
+        this.logoLarge = R.drawable.ic_enel_logo_large;
+        this.logoSmall = R.drawable.ic_enel_logo_small;
         this.phone = "0800070809";
         this.description = "În România, Grupul Enel deserveşte 2,8 milioane de clienţi prin reţeaua sa de furnizare şi distribuţie, iar Enel Green Power deţine şi operează centrale de producţie a energiei din surse regenerabile.";
         if(contract) {
@@ -60,7 +63,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
     public Provider() {
         name = "";
         utilities = null;
-        logoResID = 0;
+        logoLarge = 0;
         phone = "";
         description = "";
         contract = null;
@@ -69,7 +72,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
     public Provider(Parcel in) {
         name = in.readString();
         utilities = in.readArrayList(Utility.class.getClassLoader());
-        logoResID = in.readInt();
+        logoLarge = in.readInt();
         phone = in.readString();
         description = in.readString();
         contract = in.readParcelable(Contract.class.getClassLoader());
@@ -99,8 +102,12 @@ public class Provider implements Comparable<Provider>, Parcelable {
         return utilities;
     }
 
-    public int getLogo() {
-        return logoResID;
+    public int getLogoLarge() {
+        return logoLarge;
+    }
+
+    public int getLogoSmall() {
+        return logoSmall;
     }
 
     public String getPhone() {
@@ -138,7 +145,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
         return "Provider{" +
                 "name='" + name + '\'' +
                 ", utilities=" + utilities +
-                ", logoResID=" + logoResID +
+                ", logoLarge=" + logoLarge +
                 ", phone='" + phone + '\'' +
                 ", description='" + description + '\'' +
                 ", contract=" + contract +
@@ -154,7 +161,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeList(utilities);
-        dest.writeInt(logoResID);
+        dest.writeInt(logoLarge);
         dest.writeString(phone);
         dest.writeString(description);
         dest.writeParcelable(contract, 0);

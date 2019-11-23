@@ -1,21 +1,25 @@
 package com.example.milanease.core.ui.providers;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.milanease.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
@@ -64,13 +68,49 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        setActionBarImage();
-        setActionBarTitle();
+        initActionBar();
+    }
+
+    private void initActionBar() {
+        if (getSupportActionBar() != null) {
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setCustomView(R.layout.chat_action_bar);
+            ImageView imageView = findViewById(R.id.chat_action_bar_image);
+            imageView.setImageResource(provider.getLogoSmall());
+            TextView textView = findViewById(R.id.chat_action_bar_title);
+            textView.setText(provider.getName());
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = NavUtils.getParentActivityIntent(this);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                NavUtils.navigateUpTo(this, intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setActionBarImage() {
-//        getSupportActionBar().setIcon(provider.getLogo());
-        getSupportActionBar().setLogo(provider.getLogo());
+
+
+//        ImageView imageView = new ImageView(getApplicationContext());
+//        imageView.setImageResource(provider.getLogoLarge());
+//        getSupportActionBar().setDisplayShowCustomEnabled(true);
+//        getSupportActionBar().setDisplayOptions(getSupportActionBar().getDisplayOptions() | ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_USE_LOGO);
+//        getSupportActionBar().setCustomView(imageView);
+
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+//        getSupportActionBar().setIcon(provider.getLogoLarge());
+//        getSupportActionBar().setLogo(provider.getLogoLarge());
+//
+//        getActionBar().setDisplayUseLogoEnabled(true);
+//        getActionBar().setLogo(provider.getLogoLarge());
+////        getActionBar().setIcon(provider.getLogoLarge());
     }
 
     private void setActionBarTitle() {
