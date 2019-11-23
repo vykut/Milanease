@@ -57,13 +57,13 @@ public class Provider implements Comparable<Provider>, Parcelable {
         } else {
             this.contract = null;
         }
-
     }
 
     public Provider() {
         name = "";
         utilities = null;
         logoLarge = 0;
+        logoSmall = 0;
         phone = "";
         description = "";
         contract = null;
@@ -73,6 +73,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
         name = in.readString();
         utilities = in.readArrayList(Utility.class.getClassLoader());
         logoLarge = in.readInt();
+        logoSmall = in.readInt();
         phone = in.readString();
         description = in.readString();
         contract = in.readParcelable(Contract.class.getClassLoader());
@@ -106,9 +107,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
         return logoLarge;
     }
 
-    public int getLogoSmall() {
-        return logoSmall;
-    }
+    public int getLogoSmall() { return logoSmall; }
 
     public String getPhone() {
         return phone;
@@ -146,6 +145,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
                 "name='" + name + '\'' +
                 ", utilities=" + utilities +
                 ", logoLarge=" + logoLarge +
+                ", logoSmall=" + logoSmall +
                 ", phone='" + phone + '\'' +
                 ", description='" + description + '\'' +
                 ", contract=" + contract +
@@ -162,6 +162,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
         dest.writeString(name);
         dest.writeList(utilities);
         dest.writeInt(logoLarge);
+        dest.writeInt(logoSmall);
         dest.writeString(phone);
         dest.writeString(description);
         dest.writeParcelable(contract, 0);

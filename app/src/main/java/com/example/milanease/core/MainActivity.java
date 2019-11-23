@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment selectedFragment = null;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

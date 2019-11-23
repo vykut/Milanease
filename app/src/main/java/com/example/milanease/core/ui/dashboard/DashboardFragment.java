@@ -41,8 +41,6 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
         initComponents(root);
 
 
-
-
         return root;
     }
 
@@ -68,5 +66,6 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
     @Override
     public void stateChanged() {
         // to implement
+
     }
 }

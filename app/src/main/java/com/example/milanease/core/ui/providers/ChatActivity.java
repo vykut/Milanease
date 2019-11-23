@@ -58,7 +58,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (TextUtils.isGraphic(editText.getText())) {
                     String message = editText.getText().toString();
-                    if (message.charAt(message.length() - 1) == '\n')
+                    while (message.charAt(message.length() - 1) == '\n')
                         message = message.substring(0, message.length() - 1);
                     messages.add(new Message(message, Calendar.getInstance(), MessageState.sent));
                     messageAdapter.notifyDataSetChanged();

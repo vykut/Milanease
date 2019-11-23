@@ -3,15 +3,21 @@ package com.example.milanease.core.ui.providers;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
+import android.annotation.SuppressLint;
+import android.content.ClipboardManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.milanease.R;
+
+import java.nio.file.CopyOption;
 
 public class ProviderActivity extends AppCompatActivity {
 
@@ -63,9 +69,13 @@ public class ProviderActivity extends AppCompatActivity {
         });
 
         btnContract.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + provider.getPhone()));
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Calling " + provider.getPhone(), Toast.LENGTH_SHORT).show();
             }
         });
 
