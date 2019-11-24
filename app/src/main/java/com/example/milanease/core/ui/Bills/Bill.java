@@ -2,17 +2,20 @@ package com.example.milanease.core.ui.Bills;
 
 import com.example.milanease.core.ui.dashboard.Utility;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 public class Bill {
 
     private double price;
-    private String period;
+    private Calendar period;
     private double quantity;
     private double quantityExchanged;
     private Utility utility;
 
     public Bill() {
         this.price = 75;
-        this.period = "Jan - Mar";
+        this.period = Calendar.getInstance();
         this.quantity = 550;
         this.quantityExchanged = 2325;
         this.utility = Utility.random();
@@ -27,7 +30,14 @@ public class Bill {
     }
 
     public String getPeriod() {
-        return period;
+        return period.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+    }
+
+    public String getDueDate() {
+        period.roll(Calendar.MONTH, true);
+        String dueDate = period.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+        period.roll(Calendar.MONTH, false);
+        return dueDate;
     }
 
     public double getQuantity() {

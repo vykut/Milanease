@@ -40,6 +40,7 @@ public class ChatActivity extends AppCompatActivity {
         provider = getIntent().getParcelableExtra(ProvidersFragment.PROVIDER);
 
         initComponents();
+        initChatBot();
     }
 
     private void initComponents() {
@@ -57,10 +58,12 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isGraphic(editText.getText())) {
-                    String message = editText.getText().toString();
-                    while (message.charAt(message.length() - 1) == '\n')
-                        message = message.substring(0, message.length() - 1);
-                    messages.add(new Message(message, Calendar.getInstance(), MessageState.sent));
+                    String text = editText.getText().toString();
+                    while (text.charAt(text.length() - 1) == '\n')
+                        text = text.substring(0, text.length() - 1);
+                    Message message = new Message(text, Calendar.getInstance(), MessageState.sent);
+                    messages.add(message);
+                    messages.addAll(ChatBot.getInstance().reply(message));
                     messageAdapter.notifyDataSetChanged();
                     recyclerView.scrollToPosition(messages.size() - 1);
                 }
@@ -81,6 +84,12 @@ public class ChatActivity extends AppCompatActivity {
             TextView textView = findViewById(R.id.chat_action_bar_title);
             textView.setText(provider.getName());
         }
+    }
+
+    private void initChatBot() {
+        ChatBot.getInstance().setProvider(provider);
+        messages.add(ChatBot.getInstance().getHelp());
+        messageAdapter.notifyDataSetChanged();
     }
 
     @Override

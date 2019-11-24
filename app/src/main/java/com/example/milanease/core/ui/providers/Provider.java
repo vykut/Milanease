@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.Nullable;
 
 import com.example.milanease.R;
+import com.example.milanease.core.ui.Bills.Bill;
 import com.example.milanease.core.ui.dashboard.Utility;
 
 import java.util.ArrayList;
@@ -19,24 +20,27 @@ public class Provider implements Comparable<Provider>, Parcelable {
     private int logoSmall;
     private String phone;
     private String description;
+    private String email;
     @Nullable private Contract contract;
 
-    public Provider(String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description) {
+    public Provider(String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description, String email) {
         this.name = name;
         this.utilities = utilities;
         this.logoLarge = logoLarge;
         this.logoSmall = logoSmall;
         this.phone = phone;
         this.description = description;
+        this.email = email;
         contract = null;
     }
 
-    public Provider(String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description, @Nullable Contract contract) {
+    public Provider(String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description, String email, @Nullable Contract contract) {
         this.name = name;
         this.utilities = utilities;
         this.logoLarge = logoLarge;
         this.logoSmall = logoSmall;
         this.phone = phone;
+        this.email = email;
         this.description = description;
         this.contract = contract;
     }
@@ -51,6 +55,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
         this.logoLarge = R.drawable.ic_enel_logo_large;
         this.logoSmall = R.drawable.ic_enel_logo_small;
         this.phone = "0800070809";
+        this.email = "www.enel.ro";
         this.description = "În România, Grupul Enel deserveşte 2,8 milioane de clienţi prin reţeaua sa de furnizare şi distribuţie, iar Enel Green Power deţine şi operează centrale de producţie a energiei din surse regenerabile.";
         if(contract) {
             this.contract = new Contract();
@@ -66,6 +71,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
         logoSmall = 0;
         phone = "";
         description = "";
+        email = "";
         contract = null;
     }
 
@@ -75,6 +81,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
         logoLarge = in.readInt();
         logoSmall = in.readInt();
         phone = in.readString();
+        email = in.readString();
         description = in.readString();
         contract = in.readParcelable(Contract.class.getClassLoader());
     }
@@ -116,6 +123,8 @@ public class Provider implements Comparable<Provider>, Parcelable {
     public String getDescription() {
         return description;
     }
+
+    public String getEmail() { return email; }
 
     @Nullable
     public Contract getContract() {
@@ -164,6 +173,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
         dest.writeInt(logoLarge);
         dest.writeInt(logoSmall);
         dest.writeString(phone);
+        dest.writeString(email);
         dest.writeString(description);
         dest.writeParcelable(contract, 0);
     }

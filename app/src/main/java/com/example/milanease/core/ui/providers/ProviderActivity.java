@@ -68,7 +68,7 @@ public class ProviderActivity extends AppCompatActivity {
             }
         });
 
-        btnContract.setOnClickListener(new View.OnClickListener() {
+        btnCall.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
@@ -76,6 +76,13 @@ public class ProviderActivity extends AppCompatActivity {
                 intent.setData(Uri.parse("tel:" + provider.getPhone()));
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "Calling " + provider.getPhone(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnContract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

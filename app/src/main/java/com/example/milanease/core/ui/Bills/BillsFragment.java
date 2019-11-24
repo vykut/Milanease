@@ -46,8 +46,6 @@ public class BillsFragment extends Fragment implements SegmentedControlInterface
         bills_pager = root.findViewById(R.id.pager_bills);
         bills_pager.setAdapter(bills_adapter);
         bills_pager.setOffscreenPageLimit(bills_adapter.getCount());
-//        bills_pager.setPageMargin(-75);
-//        bills_pager.setPageMargin(-getResources().getConfiguration().screenWidthDp);
     }
 
     @Override
