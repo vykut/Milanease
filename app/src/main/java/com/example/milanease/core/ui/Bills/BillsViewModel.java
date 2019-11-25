@@ -4,31 +4,27 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.milanease.data.RepositoryManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class BillsViewModel extends ViewModel {
 
-    private MutableLiveData<List<Bill>> bills_live_data;
-    private List<Bill> bills_list;
+    private MutableLiveData<List<Bill>> mBills;
+    private RepositoryManager repositoryManager = RepositoryManager.getInstance();
 
-    public BillsViewModel() {
-        bills_live_data = new MutableLiveData<>();
-
-        initDefaultBills();
-
-        bills_live_data.setValue(bills_list);
-    }
-
-    private void initDefaultBills() {
-        bills_list = new ArrayList<>();
-
-        for (int i = 0; i < 5; i++) {
-            bills_list.add(new Bill());
-        }
+    public void init() {
+        mBills = repositoryManager.getBills();
     }
 
     public LiveData<List<Bill>> getBills() {
-        return bills_live_data;
+        return mBills;
+    }
+
+    public void addNewBill(Bill bill) {
+        List<Bill> bills = mBills.getValue();
+        bills.add(bill);
+        mBills.postValue(bills);
     }
 }
