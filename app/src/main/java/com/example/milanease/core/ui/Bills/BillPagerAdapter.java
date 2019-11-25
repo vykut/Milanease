@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.milanease.R;
@@ -56,7 +55,7 @@ public class BillPagerAdapter extends PagerAdapter {
         final Bill bill = bills.get(position);
 
         totalCost.setText(bill.displayPrice());
-        period.setText(bill.getPeriod());
+        period.setText(bill.displayPeriod());
         totalUsage.setText(bill.displayQuantity());
         totalUsageExchanged.setText(bill.displayQuantityExchanged());
 

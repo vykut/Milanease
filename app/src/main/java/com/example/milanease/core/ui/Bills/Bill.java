@@ -5,19 +5,19 @@ import com.example.milanease.core.ui.dashboard.Utility;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Bill {
+public class Bill implements Comparable<Bill> {
 
+    private String providerID;
     private double price;
     private Calendar period;
     private double quantity;
-    private double quantityExchanged;
     private Utility utility;
 
-    public Bill() {
+    public Bill(Utility utility) {
+        this.providerID = "0001";
         this.price = 75;
         this.period = Calendar.getInstance();
         this.quantity = 550;
-        this.quantityExchanged = 2325;
         this.utility = Utility.random();
     }
 
@@ -29,8 +29,12 @@ public class Bill {
         return price + "€";
     }
 
-    public String getPeriod() {
+    public String displayPeriod() {
         return period.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+    }
+
+    public Calendar getPeriod() {
+        return period;
     }
 
     public String getDueDate() {
@@ -53,10 +57,6 @@ public class Bill {
         }
     }
 
-    public double getQuantityExchanged() {
-        return quantityExchanged;
-    }
-
     public String displayQuantityExchanged() {
         double multiplier = 0;
         String string = "";
@@ -77,10 +77,19 @@ public class Bill {
                 break;
             }
         }
-        return (quantity * multiplier) + " " + string;
+        return Double.valueOf(quantity * multiplier).intValue() + " " + string;
     }
 
     public Utility getUtility() {
         return utility;
+    }
+
+    public String getProviderID() {
+        return providerID;
+    }
+
+    @Override
+    public int compareTo(Bill o) {
+        return period.compareTo(o.getPeriod());
     }
 }

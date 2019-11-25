@@ -30,14 +30,17 @@ public class BillsFragment extends Fragment implements SegmentedControlInterface
 
         View root = inflater.inflate(R.layout.fragment_bills, container, false);
 
+        billsViewModel =
+                ViewModelProviders.of(this).get(BillsViewModel.class);
+        billsViewModel.init();
+
         initComponents(root);
 
         return root;
     }
 
     private void initComponents(View root) {
-        billsViewModel =
-                ViewModelProviders.of(this).get(BillsViewModel.class);
+
         segmentedControl = root.findViewById(R.id.bills_segmented_control);
         segmentedControl.setDelegate(this);
 

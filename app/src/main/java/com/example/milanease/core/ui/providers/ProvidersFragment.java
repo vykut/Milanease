@@ -20,7 +20,7 @@ public class ProvidersFragment extends Fragment implements ProviderInterface {
     private RecyclerView providersRecyclerView;
     private ProviderAdapter providerAdapter;
 
-    public static String PROVIDER_POSITION = "ProviderID";
+    public static String PROVIDER = "Provider";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -50,10 +50,10 @@ public class ProvidersFragment extends Fragment implements ProviderInterface {
     }
 
     @Override
-    public void providerClicked(int position) {
+    public void providerClicked(Provider provider) {
 //        Toast.makeText(getContext(), provider.getName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), ProviderActivity.class);
-        intent.putExtra(PROVIDER_POSITION, position);
+        intent.putExtra(PROVIDER, provider);
         startActivity(intent);
     }
 

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.annotation.Nullable;
 
 import com.example.milanease.R;
-import com.example.milanease.core.ui.Bills.Bill;
 import com.example.milanease.core.ui.dashboard.Utility;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ import java.util.List;
 public class Provider implements Comparable<Provider>, Parcelable {
 
     private String name;
+    private String id;
     private List<Utility> utilities;
     private int logoLarge;
     private int logoSmall;
@@ -23,7 +23,8 @@ public class Provider implements Comparable<Provider>, Parcelable {
     private String email;
     @Nullable private Contract contract;
 
-    public Provider(String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description, String email) {
+    public Provider(String id, String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description, String email) {
+        this.id = id;
         this.name = name;
         this.utilities = utilities;
         this.logoLarge = logoLarge;
@@ -34,7 +35,8 @@ public class Provider implements Comparable<Provider>, Parcelable {
         contract = null;
     }
 
-    public Provider(String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description, String email, @Nullable Contract contract) {
+    public Provider(String id, String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description, String email, @Nullable Contract contract) {
+        this.id = id;
         this.name = name;
         this.utilities = utilities;
         this.logoLarge = logoLarge;
@@ -46,6 +48,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
     }
 
     public Provider(boolean contract) {
+        this.id = "0001";
         this.name = "Enel";
 
         List<Utility> utilities = new ArrayList<>();
@@ -65,6 +68,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
     }
 
     public Provider() {
+        id = "";
         name = "";
         utilities = null;
         logoLarge = 0;
@@ -76,6 +80,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
     }
 
     public Provider(Parcel in) {
+        id = in.readString();
         name = in.readString();
         utilities = in.readArrayList(Utility.class.getClassLoader());
         logoLarge = in.readInt();
@@ -126,6 +131,10 @@ public class Provider implements Comparable<Provider>, Parcelable {
 
     public String getEmail() { return email; }
 
+    public String getID() {
+        return id;
+    }
+
     @Nullable
     public Contract getContract() {
         return contract;
@@ -148,15 +157,18 @@ public class Provider implements Comparable<Provider>, Parcelable {
 //        return "non-null contract";
 //    }
 
+
     @Override
     public String toString() {
         return "Provider{" +
                 "name='" + name + '\'' +
+                ", id='" + id + '\'' +
                 ", utilities=" + utilities +
                 ", logoLarge=" + logoLarge +
                 ", logoSmall=" + logoSmall +
                 ", phone='" + phone + '\'' +
                 ", description='" + description + '\'' +
+                ", email='" + email + '\'' +
                 ", contract=" + contract +
                 '}';
     }
@@ -168,6 +180,7 @@ public class Provider implements Comparable<Provider>, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeString(name);
         dest.writeList(utilities);
         dest.writeInt(logoLarge);

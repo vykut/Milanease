@@ -33,22 +33,14 @@ public class ProviderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider);
 
-        providerActivityViewModel = ViewModelProviders.of(this).get(ProviderActivityViewModel.class);
-        providerActivityViewModel.init();
-
         Intent intent = getIntent();
-        int position = intent.getIntExtra(ProvidersFragment.PROVIDER_POSITION, 0);
+        Provider provider = intent.getParcelableExtra(ProvidersFragment.PROVIDER);
 
-        providerActivityViewModel.setPosition(position);
+        providerActivityViewModel = ViewModelProviders.of(this).get(ProviderActivityViewModel.class);
+        providerActivityViewModel.init(provider);
 
         initComponents();
-
-        providerActivityViewModel.getProvider().observe(this, new Observer<Provider>() {
-            @Override
-            public void onChanged(Provider provider) {
-                initProviderUI(provider);
-            }
-        });
+        initProviderUI(provider);
     }
 
     private void initComponents() {
@@ -59,41 +51,9 @@ public class ProviderActivity extends AppCompatActivity {
         description = findViewById(R.id.activity_provider_description);
         contractName = findViewById(R.id.activity_provider_contract_name);
         btnContract = findViewById(R.id.activity_provider_contract_btn);
-
-        btnCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        btnMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnCall.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("MissingPermission")
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + providerActivityViewModel.getProvider().getValue().getPhone()));
-                    startActivity(intent);
-            }
-        });
-
-        btnContract.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //
-            }
-        });
     }
 
-    private void initProviderUI(Provider provider) {
+    private void initProviderUI(final Provider provider) {
         logo.setImageResource(provider.getLogoLarge());
 
         name.setText(provider.getName());
@@ -105,6 +65,32 @@ public class ProviderActivity extends AppCompatActivity {
             contractName.setText("Add a contract now");
             btnContract.setImageResource(R.drawable.add_24dp);
         }
+
+        btnMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                intent.putExtra(ProvidersFragment.PROVIDER, provider);
+                startActivity(intent);
+            }
+        });
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + provider.getPhone()));
+                startActivity(intent);
+            }
+        });
+
+        btnContract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+            }
+        });
 
         setActionBarTitle(provider.getName());
     }

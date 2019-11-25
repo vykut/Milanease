@@ -3,10 +3,13 @@ package com.example.milanease.data;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.milanease.core.ui.Bills.Bill;
+import com.example.milanease.core.ui.dashboard.Utility;
+import com.example.milanease.core.ui.providers.ChatBot;
 import com.example.milanease.core.ui.providers.Message;
 import com.example.milanease.core.ui.providers.Provider;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RepositoryManager {
@@ -20,18 +23,21 @@ public class RepositoryManager {
     private List<Bill> bills;
     private List<Message> messages;
 
-    private RepositoryManager() {}
+    private RepositoryManager() {
+        messages = new ArrayList<>();
+        initProviders();
+        initBills();
+        initMessages();
+    }
 
     public MutableLiveData<List<Bill>> getBills() {
-        initBills();
-
         MutableLiveData<List<Bill>> mBills = new MutableLiveData<>();
         mBills.setValue(bills);
         return mBills;
     }
 
     public MutableLiveData<List<Provider>> getProviders() {
-        initProviders();
+
 
         MutableLiveData<List<Provider>> mProviders = new MutableLiveData<>();
         mProviders.setValue(providers);
@@ -55,24 +61,54 @@ public class RepositoryManager {
 
     }
 
+    public MutableLiveData<List<Message>> getMessages(Provider provider) {
+        MutableLiveData<List<Message>> mMessages = new MutableLiveData<>();
+        List<Message> messages = new ArrayList<>();
+
+        for (Message message : this.messages) {
+            if (message.getProviderID().equals(provider.getID()))
+                messages.add(message);
+        }
+        mMessages.setValue(messages);
+        return mMessages;
+    }
+    
+    public MutableLiveData<List<Bill>> getBills(Provider provider) {
+        MutableLiveData<List<Bill>> mBills = new MutableLiveData<>();
+        List<Bill> bills = new ArrayList<>();
+        for (Bill bill: this.bills) {
+            if (bill.getProviderID().equals(provider.getID()))
+                bills.add(bill);
+        }
+        mBills.setValue(bills);
+        return mBills;
+    }
+
     private void initBills() {
         bills = new ArrayList<>();
 
         for (int i = 0; i < 5; i++) {
-            bills.add(new Bill());
+            bills.add(new Bill(Utility.electricity));
         }
+
+        bills.add(new Bill(Utility.water));
+        bills.add(new Bill(Utility.water));
+        bills.add(new Bill(Utility.gas));
+        bills.add(new Bill(Utility.gas));
     }
 
     private void initProviders() {
         providers = new ArrayList<>();
 
-        providers.add(new Provider(true));
-        providers.add(new Provider(true));
-        providers.add(new Provider(false));
-        providers.add(new Provider(false));
-        providers.add(new Provider(false));
-        providers.add(new Provider(false));
+        for (int i = 0; i < 6; i++) {
+            if (i < 2)
+                providers.add(new Provider(true));
+            else
+                providers.add(new Provider(false));
+        }
     }
 
-
+    private void initMessages() {
+        messages = new ArrayList<>();
+    }
 }

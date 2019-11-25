@@ -8,23 +8,15 @@ import com.example.milanease.data.RepositoryManager;
 
 public class ProviderActivityViewModel extends ViewModel {
 
-    private MutableLiveData<Integer> mPosition;
+    private MutableLiveData<Provider> mProvider;
     private RepositoryManager repositoryManager = RepositoryManager.getInstance();
 
-    public void init() {
-        mPosition = new MutableLiveData<>();
-        mPosition.setValue(0);
-    }
-
-    public void setPosition(int position) {
-        this.mPosition.setValue(position);
+    public void init(Provider provider) {
+        mProvider = new MutableLiveData<>();
+        mProvider.setValue(provider);
     }
 
     public LiveData<Provider> getProvider() {
-        return repositoryManager.getProvider(mPosition.getValue());
-    }
-
-    public LiveData<Integer> getPosition() {
-        return mPosition;
+        return mProvider;
     }
 }

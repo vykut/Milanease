@@ -32,18 +32,15 @@ public class ChatActivity extends AppCompatActivity {
     private EditText editText;
     private ChatActivityViewModel chatActivityViewModel;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        int position = getIntent().getIntExtra(ProvidersFragment.PROVIDER_POSITION, 0);
+        Provider provider = getIntent().getParcelableExtra(ProvidersFragment.PROVIDER);
 
         chatActivityViewModel = ViewModelProviders.of(this).get(ChatActivityViewModel.class);
-        chatActivityViewModel.init();
-
-        chatActivityViewModel.setPosition(position);
+        chatActivityViewModel.init(provider);
 
         chatActivityViewModel.getMessages().observe(this, new Observer<List<Message>>() {
             @Override
@@ -53,17 +50,16 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        initComponents();
+        initComponents(chatActivityViewModel.getProvider().getValue(), chatActivityViewModel.getMessages().getValue());
         initChatBot();
     }
 
-    private void initComponents() {
+    private void initComponents(final Provider provider, List<Message> messages) {
         recyclerView = findViewById(R.id.activity_chat_recycler_view);
-        messageAdapter = new MessageAdapter(chatActivityViewModel.getMessages().getValue(), getApplicationContext());
+        messageAdapter = new MessageAdapter(messages, getApplicationContext());
         recyclerView.setAdapter(messageAdapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
 
         editText = findViewById(R.id.activity_chat_edit_text);
         send = findViewById(R.id.activity_chat_btn_send);
@@ -75,31 +71,31 @@ public class ChatActivity extends AppCompatActivity {
                     String text = editText.getText().toString();
                     while (text.charAt(text.length() - 1) == '\n')
                         text = text.substring(0, text.length() - 1);
-                    Message message = new Message(text, Calendar.getInstance(), MessageState.sent);
+                    Message message = new Message(provider.getID(), text, Calendar.getInstance(), MessageState.sent);
                     chatActivityViewModel.addMessage(message);
                     ChatBot.getInstance().reply(message);
-
                 }
                 editText.setText("");
             }
         });
 
-        initActionBar();
+        initActionBar(provider);
     }
 
-    private void initActionBar() {
+    private void initActionBar(Provider provider) {
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayShowCustomEnabled(true);
             actionBar.setCustomView(R.layout.chat_action_bar);
             ImageView imageView = findViewById(R.id.chat_action_bar_image);
-            imageView.setImageResource(chatActivityViewModel.getProvider().getValue().getLogoSmall());
+            imageView.setImageResource(provider.getLogoSmall());
             TextView textView = findViewById(R.id.chat_action_bar_title);
-            textView.setText(chatActivityViewModel.getProvider().getValue().getName());
+            textView.setText(provider.getName());
         }
     }
 
     private void initChatBot() {
+        ChatBot.getInstance().setViewModel(chatActivityViewModel);
         chatActivityViewModel.addMessage(ChatBot.getInstance().getHelp());
     }
 
@@ -113,27 +109,5 @@ public class ChatActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void setActionBarImage() {
-
-
-//        ImageView imageView = new ImageView(getApplicationContext());
-//        imageView.setImageResource(provider.getLogoLarge());
-//        getSupportActionBar().setDisplayShowCustomEnabled(true);
-//        getSupportActionBar().setDisplayOptions(getSupportActionBar().getDisplayOptions() | ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_USE_LOGO);
-//        getSupportActionBar().setCustomView(imageView);
-
-//        getSupportActionBar().setDisplayUseLogoEnabled(true);
-//        getSupportActionBar().setIcon(provider.getLogoLarge());
-//        getSupportActionBar().setLogo(provider.getLogoLarge());
-//
-//        getActionBar().setDisplayUseLogoEnabled(true);
-//        getActionBar().setLogo(provider.getLogoLarge());
-////        getActionBar().setIcon(provider.getLogoLarge());
-    }
-
-    private void setActionBarTitle() {
-        getSupportActionBar().setTitle(chatActivityViewModel.getProvider().getValue().getName());
     }
 }
