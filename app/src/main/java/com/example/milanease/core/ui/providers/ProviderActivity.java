@@ -2,9 +2,10 @@ package com.example.milanease.core.ui.providers;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.annotation.SuppressLint;
-import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,11 +14,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.milanease.R;
-
-import java.nio.file.CopyOption;
 
 public class ProviderActivity extends AppCompatActivity {
 
@@ -28,19 +26,29 @@ public class ProviderActivity extends AppCompatActivity {
     private TextView description;
     private TextView contractName;
     private ImageButton btnContract;
-    private Provider provider;
+    private ProviderActivityViewModel providerActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_provider);
 
+        providerActivityViewModel = ViewModelProviders.of(this).get(ProviderActivityViewModel.class);
+        providerActivityViewModel.init();
+
         Intent intent = getIntent();
-        provider = intent.getParcelableExtra(ProvidersFragment.PROVIDER);
+        int position = intent.getIntExtra(ProvidersFragment.PROVIDER_POSITION, 0);
+
+        providerActivityViewModel.setPosition(position);
 
         initComponents();
 
-        initProviderUI();
+        providerActivityViewModel.getProvider().observe(this, new Observer<Provider>() {
+            @Override
+            public void onChanged(Provider provider) {
+                initProviderUI(provider);
+            }
+        });
     }
 
     private void initComponents() {
@@ -63,7 +71,6 @@ public class ProviderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-                intent.putExtra(ProvidersFragment.PROVIDER, provider);
                 startActivity(intent);
             }
         });
@@ -73,23 +80,20 @@ public class ProviderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + provider.getPhone()));
+                intent.setData(Uri.parse("tel:" + providerActivityViewModel.getProvider().getValue().getPhone()));
                     startActivity(intent);
-                    Toast.makeText(getApplicationContext(), "Calling " + provider.getPhone(), Toast.LENGTH_SHORT).show();
             }
         });
 
         btnContract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //
             }
         });
-
-        setActionBarTitle(provider.getName());
     }
 
-    private void initProviderUI() {
+    private void initProviderUI(Provider provider) {
         logo.setImageResource(provider.getLogoLarge());
 
         name.setText(provider.getName());
@@ -101,6 +105,8 @@ public class ProviderActivity extends AppCompatActivity {
             contractName.setText("Add a contract now");
             btnContract.setImageResource(R.drawable.add_24dp);
         }
+
+        setActionBarTitle(provider.getName());
     }
 
     @Override
@@ -108,7 +114,7 @@ public class ProviderActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = NavUtils.getParentActivityIntent(this);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 NavUtils.navigateUpTo(this, intent);
                 return true;
         }

@@ -30,49 +30,46 @@ public class ChatBot {
     private final static String YES = "yes";
     private final static String NO = "no";
 
-    private Provider provider;
-//    private LoginViewModel loginViewModel;
-//    private Context context;
+    private ChatActivityViewModel chatActivityViewModel;
 
-    private ChatBot() {
-//        loginViewModel = ViewModelProviders.of().get(LoginViewModel.class);
+    private ChatBot() {}
+
+
+    public void setViewModel(ChatActivityViewModel chatActivityViewModel) {
+        this.chatActivityViewModel = chatActivityViewModel;
     }
 
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
-
-    public List<Message> reply(Message message) {
+    public void reply(Message message) {
         List<Message> messages = new ArrayList<>();
         if (message.getMessage().contains(BILL_TOTAL_MESSAGE))
             messages.add(new Message(getBillTotal(), MessageState.received));
         if (message.getMessage().contains(CONTRACT_NEW_MESSAGE))
-            if (provider.getContract() != null)
+            if (chatActivityViewModel.getProvider().getValue().getContract() != null)
                 messages.add(new Message("You already have a contract.", MessageState.received));
             else
                 messages.add(new Message("If you'd like to make a new contract, please go back to the previous screen and press the + button.", MessageState.received));
         if (message.getMessage().contains(CONTRACT_RENEW_MESSAGE))
-            messages.add(new Message(String.format("If you have any inquiries about your current contract or would like to add new options, please call us at the following phone number: %s.", provider.getPhone()), MessageState.received));
+            messages.add(new Message(String.format("If you have any inquiries about your current contract or would like to add new options, please call us at the following phone number: %s.", chatActivityViewModel.getProvider().getValue().getPhone()), MessageState.received));
         if (message.getMessage().contains(CONTRACT_STOP_MESSAGE))
             messages.add(new Message("One of our employees will get in touch with you soon. We are sorry to see you go!", MessageState.received));
         if (message.getMessage().contains(ASSISTANCE))
             messages.add(new Message("Dispatching a team to your location. They should arrive shortly.", MessageState.received));
         if (message.getMessage().contains(PHONE_NUMBER))
-            messages.add(new Message(String.format("You can call us at %s, available 24/7.", provider.getPhone()), MessageState.received));
+            messages.add(new Message(String.format("You can call us at %s, available 24/7.", chatActivityViewModel.getProvider().getValue().getPhone()), MessageState.received));
         if (message.getMessage().contains(EMAIL))
-            messages.add(new Message(String.format("You can write us at %s.", provider.getEmail()), MessageState.received));
+            messages.add(new Message(String.format("You can write us at %s.", chatActivityViewModel.getProvider().getValue().getEmail()), MessageState.received));
         if (message.getMessage().contains(HELP)) {
             messages.add(getHelp());
-            return messages;
+            chatActivityViewModel.addMessages(messages);
         }
 
         if (message.getMessage().contains(NO)) {
             messages.add(new Message("Have a good day!", MessageState.received));
-            return messages;
+            chatActivityViewModel.addMessages(messages);
         }
         if (message.getMessage().contains(YES)) {
             messages.add(getHelp());
-            return messages;
+            chatActivityViewModel.addMessages(messages);
         }
 
         if (messages.isEmpty()) {
@@ -81,7 +78,7 @@ public class ChatBot {
         }
         else
             messages.add(new Message("Is there anything else we can assist you with?", MessageState.received));
-        return messages;
+        chatActivityViewModel.addMessages(messages);
     }
 
     public Message getHelp() {
@@ -90,7 +87,7 @@ public class ChatBot {
 
     private String getBillTotal() {
         String billTotal = "";
-        for (Utility utility : provider.getUtilities()) {
+        for (Utility utility : chatActivityViewModel.getProvider().getValue().getUtilities()) {
             billTotal = "75€";
         }
         return billTotal;

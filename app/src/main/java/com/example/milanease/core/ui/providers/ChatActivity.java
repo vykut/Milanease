@@ -3,6 +3,8 @@ package com.example.milanease.core.ui.providers;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,12 +26,11 @@ import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private Provider provider;
-    private List<Message> messages = new ArrayList<>();
     private RecyclerView recyclerView;
     private MessageAdapter messageAdapter;
     private Button send;
     private EditText editText;
+    private ChatActivityViewModel chatActivityViewModel;
 
 
     @Override
@@ -37,7 +38,20 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        provider = getIntent().getParcelableExtra(ProvidersFragment.PROVIDER);
+        int position = getIntent().getIntExtra(ProvidersFragment.PROVIDER_POSITION, 0);
+
+        chatActivityViewModel = ViewModelProviders.of(this).get(ChatActivityViewModel.class);
+        chatActivityViewModel.init();
+
+        chatActivityViewModel.setPosition(position);
+
+        chatActivityViewModel.getMessages().observe(this, new Observer<List<Message>>() {
+            @Override
+            public void onChanged(List<Message> messages) {
+                messageAdapter.notifyDataSetChanged();
+                recyclerView.scrollToPosition(messages.size() - 1);
+            }
+        });
 
         initComponents();
         initChatBot();
@@ -45,7 +59,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void initComponents() {
         recyclerView = findViewById(R.id.activity_chat_recycler_view);
-        messageAdapter = new MessageAdapter(messages, getApplicationContext());
+        messageAdapter = new MessageAdapter(chatActivityViewModel.getMessages().getValue(), getApplicationContext());
         recyclerView.setAdapter(messageAdapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -62,10 +76,9 @@ public class ChatActivity extends AppCompatActivity {
                     while (text.charAt(text.length() - 1) == '\n')
                         text = text.substring(0, text.length() - 1);
                     Message message = new Message(text, Calendar.getInstance(), MessageState.sent);
-                    messages.add(message);
-                    messages.addAll(ChatBot.getInstance().reply(message));
-                    messageAdapter.notifyDataSetChanged();
-                    recyclerView.scrollToPosition(messages.size() - 1);
+                    chatActivityViewModel.addMessage(message);
+                    ChatBot.getInstance().reply(message);
+
                 }
                 editText.setText("");
             }
@@ -80,16 +93,14 @@ public class ChatActivity extends AppCompatActivity {
             actionBar.setDisplayShowCustomEnabled(true);
             actionBar.setCustomView(R.layout.chat_action_bar);
             ImageView imageView = findViewById(R.id.chat_action_bar_image);
-            imageView.setImageResource(provider.getLogoSmall());
+            imageView.setImageResource(chatActivityViewModel.getProvider().getValue().getLogoSmall());
             TextView textView = findViewById(R.id.chat_action_bar_title);
-            textView.setText(provider.getName());
+            textView.setText(chatActivityViewModel.getProvider().getValue().getName());
         }
     }
 
     private void initChatBot() {
-        ChatBot.getInstance().setProvider(provider);
-        messages.add(ChatBot.getInstance().getHelp());
-        messageAdapter.notifyDataSetChanged();
+        chatActivityViewModel.addMessage(ChatBot.getInstance().getHelp());
     }
 
     @Override
@@ -123,6 +134,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void setActionBarTitle() {
-        getSupportActionBar().setTitle(provider.getName());
+        getSupportActionBar().setTitle(chatActivityViewModel.getProvider().getValue().getName());
     }
 }

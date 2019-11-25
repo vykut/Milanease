@@ -12,6 +12,7 @@ import java.util.List;
 public class ProvidersFragmentViewModel extends ViewModel {
 
     private MutableLiveData<List<Provider>> mProviders;
+    private MutableLiveData<Provider> mProvider;
     private RepositoryManager repositoryManager = RepositoryManager.getInstance();
 
     public void init() {
@@ -27,5 +28,4 @@ public class ProvidersFragmentViewModel extends ViewModel {
         providers.add(provider);
         mProviders.postValue(providers);
     }
-
 }

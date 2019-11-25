@@ -3,6 +3,7 @@ package com.example.milanease.data;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.milanease.core.ui.Bills.Bill;
+import com.example.milanease.core.ui.providers.Message;
 import com.example.milanease.core.ui.providers.Provider;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class RepositoryManager {
 
     private List<Provider> providers;
     private List<Bill> bills;
+    private List<Message> messages;
 
     private RepositoryManager() {}
 
@@ -34,6 +36,23 @@ public class RepositoryManager {
         MutableLiveData<List<Provider>> mProviders = new MutableLiveData<>();
         mProviders.setValue(providers);
         return mProviders;
+    }
+
+    public MutableLiveData<Provider> getProvider(int position) {
+        if (providers == null) {
+            initProviders();
+        }
+
+        MutableLiveData<Provider> mProvider = new MutableLiveData<>();
+        mProvider.setValue(providers.get(position));
+        return mProvider;
+    }
+
+    public MutableLiveData<List<Message>> getMessages() {
+        MutableLiveData<List<Message>> mMessages = new MutableLiveData<>();
+        mMessages.setValue(messages);
+        return mMessages;
+
     }
 
     private void initBills() {
@@ -54,4 +73,6 @@ public class RepositoryManager {
         providers.add(new Provider(false));
         providers.add(new Provider(false));
     }
+
+
 }

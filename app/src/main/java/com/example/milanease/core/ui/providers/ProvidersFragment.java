@@ -18,15 +18,17 @@ public class ProvidersFragment extends Fragment implements ProviderInterface {
 
     private ProvidersFragmentViewModel providersFragmentViewModel;
     private RecyclerView providersRecyclerView;
-    ProviderAdapter providerAdapter;
+    private ProviderAdapter providerAdapter;
 
-    public static String PROVIDER = "Provider";
+    public static String PROVIDER_POSITION = "ProviderID";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         providersFragmentViewModel =
                 ViewModelProviders.of(this).get(ProvidersFragmentViewModel.class);
+        providersFragmentViewModel.init();
+
         View root = inflater.inflate(R.layout.fragment_providers, container, false);
 
         initComponents(root);
@@ -48,10 +50,10 @@ public class ProvidersFragment extends Fragment implements ProviderInterface {
     }
 
     @Override
-    public void providerClicked(Provider provider) {
+    public void providerClicked(int position) {
 //        Toast.makeText(getContext(), provider.getName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), ProviderActivity.class);
-        intent.putExtra(PROVIDER, provider);
+        intent.putExtra(PROVIDER_POSITION, position);
         startActivity(intent);
     }
 

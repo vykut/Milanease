@@ -136,7 +136,7 @@ public class ProviderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View v) {
                     if (delegate != null)
-                    delegate.providerClicked(providers.get(position));
+                    delegate.providerClicked(position);
                 }
             });
 
