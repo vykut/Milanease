@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milanease.R;
+import com.example.milanease.data.model.Message;
 
 import java.util.Calendar;
 import java.util.List;

@@ -7,72 +7,69 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.milanease.R;
 import com.example.milanease.core.ui.SegmentedControlInterface;
 import com.example.milanease.core.ui.dashboard.SegmentedControl;
+import com.example.milanease.core.ui.dashboard.Utility;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BillsFragment extends Fragment implements SegmentedControlInterface {
 
     private BillsViewModel billsViewModel;
-    private ViewPager bills_pager;
-    private BillPagerAdapter bills_adapter;
+    private ViewPager billsPager;
+    private BillPagerAdapter billsAdapter;
     private SegmentedControl segmentedControl;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_bills, container, false);
 
+        initComponents(root);
+
         billsViewModel =
                 ViewModelProviders.of(this).get(BillsViewModel.class);
-        billsViewModel.init();
+        billsViewModel.init(Utility.water);
 
-        initComponents(root);
+        billsViewModel.getSegmentedBills().observe(getViewLifecycleOwner(), new Observer<List<Bill>>() {
+            @Override
+            public void onChanged(List<Bill> bills) {
+                initAdapter(bills);
+            }
+        });
 
         return root;
     }
 
     private void initComponents(View root) {
-
         segmentedControl = root.findViewById(R.id.bills_segmented_control);
+        segmentedControl.toggleUtility(Utility.water);
         segmentedControl.setDelegate(this);
 
-        bills_adapter = initAdapter();
+        billsPager = root.findViewById(R.id.pager_bills);
 
-        bills_pager = root.findViewById(R.id.pager_bills);
-        bills_pager.setAdapter(bills_adapter);
-        bills_pager.setOffscreenPageLimit(bills_adapter.getCount());
+        billsPager.setOffscreenPageLimit(3);
+    }
+
+    private void initAdapter(List<Bill> bills) {
+            billsAdapter = new BillPagerAdapter(bills, getContext());
+            billsPager.setAdapter(billsAdapter);
+    }
+
+    @Override
+    public void stateChanged() {
+        billsViewModel.setUtility(segmentedControl.getState());
     }
 
     @Override
     public void onDestroy() {
         segmentedControl.setDelegate(null);
         super.onDestroy();
-    }
-
-    private BillPagerAdapter initAdapter() {
-
-        List<Bill> bills = new ArrayList<>();
-
-        for(Bill bill : billsViewModel.getBills().getValue()) {
-            if(bill.getUtility().equals(segmentedControl.getState())) {
-                bills.add(bill);
-            }
-        }
-
-        return new BillPagerAdapter(bills, getContext());
-    }
-
-    @Override
-    public void stateChanged() {
-        bills_adapter = initAdapter();
-        bills_pager.setAdapter(bills_adapter);
     }
 }

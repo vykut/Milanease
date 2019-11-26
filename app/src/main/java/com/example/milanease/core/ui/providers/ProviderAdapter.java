@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milanease.R;
 import com.example.milanease.core.ui.dashboard.Utility;
+import com.example.milanease.data.model.Provider;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ProviderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -73,37 +73,6 @@ public class ProviderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public ProviderAdapter(List<Provider> providers, Context context) {
         this.context = context;
         this.providers = providers;
-        Collections.sort(this.providers);
-        int flag = -1;
-        for(int i = 0; i < providers.size(); i++) {
-            if (providers.get(i).getContract() == null) {
-                flag = i;
-                break;
-            }
-        }
-
-        switch (flag) {
-            case -1: {
-                Provider p = new Provider();
-                p.setName("Your Providers");
-                providers.add(0, p);
-                break;
-            }
-            case 0: {
-                Provider p = new Provider();
-                p.setName("Other Providers");
-                providers.add(0, p);
-                break;
-            }
-            default: {
-                Provider p = new Provider();
-                p.setName("Your Providers");
-                providers.add(0, p);
-                Provider p1 = new Provider();
-                p1.setName("Other Providers");
-                providers.add(flag + 1, p1);
-            }
-        }
     }
 
     @Override

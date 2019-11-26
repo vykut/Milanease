@@ -1,4 +1,4 @@
-package com.example.milanease.core.ui.providers;
+package com.example.milanease.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -140,6 +140,11 @@ public class Provider implements Comparable<Provider>, Parcelable {
         return contract;
     }
 
+    public void addContract(Contract contract) {
+        if (this.contract == null)
+        this.contract = contract;
+    }
+
     @Override
     public int compareTo(Provider o) {
         if (this.contract == null)
@@ -189,5 +194,13 @@ public class Provider implements Comparable<Provider>, Parcelable {
         dest.writeString(email);
         dest.writeString(description);
         dest.writeParcelable(contract, 0);
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof Provider)
+            if (((Provider) obj).getID().equals(id))
+                return true;
+            return false;
     }
 }

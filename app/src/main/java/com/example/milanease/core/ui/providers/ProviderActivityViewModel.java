@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.milanease.data.RepositoryManager;
+import com.example.milanease.data.model.Contract;
+import com.example.milanease.data.model.Provider;
 
 public class ProviderActivityViewModel extends ViewModel {
 
@@ -18,5 +20,12 @@ public class ProviderActivityViewModel extends ViewModel {
 
     public LiveData<Provider> getProvider() {
         return mProvider;
+    }
+
+    public void addContract(Contract contract) {
+        Provider provider = mProvider.getValue();
+        provider.addContract(contract);
+        mProvider.setValue(provider);
+        repositoryManager.addContract(provider, contract);
     }
 }

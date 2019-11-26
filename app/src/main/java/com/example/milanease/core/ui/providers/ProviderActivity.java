@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.milanease.R;
+import com.example.milanease.data.model.Contract;
+import com.example.milanease.data.model.Provider;
 
 public class ProviderActivity extends AppCompatActivity {
 
@@ -36,11 +38,17 @@ public class ProviderActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Provider provider = intent.getParcelableExtra(ProvidersFragment.PROVIDER);
 
+        initComponents();
+
         providerActivityViewModel = ViewModelProviders.of(this).get(ProviderActivityViewModel.class);
         providerActivityViewModel.init(provider);
 
-        initComponents();
-        initProviderUI(provider);
+        providerActivityViewModel.getProvider().observe(this, new Observer<Provider>() {
+            @Override
+            public void onChanged(Provider provider) {
+                initProviderUI(provider);
+            }
+        });
     }
 
     private void initComponents() {
@@ -89,6 +97,7 @@ public class ProviderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //
+                providerActivityViewModel.addContract(new Contract());
             }
         });
 

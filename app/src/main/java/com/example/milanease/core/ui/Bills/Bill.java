@@ -18,7 +18,7 @@ public class Bill implements Comparable<Bill> {
         this.price = 75;
         this.period = Calendar.getInstance();
         this.quantity = 550;
-        this.utility = Utility.random();
+        this.utility = utility;
     }
 
     public double getPrice() {

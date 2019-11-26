@@ -1,7 +1,9 @@
-package com.example.milanease.core.ui.providers;
+package com.example.milanease.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.example.milanease.core.ui.providers.MessageState;
 
 import java.util.Calendar;
 import java.util.Date;

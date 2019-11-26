@@ -2,20 +2,15 @@ package com.example.milanease.core.ui.dashboard;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.net.sip.SipSession;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.milanease.R;
 import com.example.milanease.core.ui.SegmentedControlInterface;
-
-import org.xmlpull.v1.XmlPullParser;
 
 public class SegmentedControl extends ConstraintLayout {
 
@@ -46,7 +41,6 @@ public class SegmentedControl extends ConstraintLayout {
 
     private void init(Context context) {
         inflate(context, R.layout.segmented_control, this);
-
         initComponents();
     }
 
@@ -55,7 +49,6 @@ public class SegmentedControl extends ConstraintLayout {
         water = findViewById(R.id.water_button);
         gas = findViewById(R.id.gas_button);
         electricity = findViewById(R.id.electricity_button);
-
 
         gas.setOnClickListener(new OnClickListener() {
             @Override
@@ -70,9 +63,6 @@ public class SegmentedControl extends ConstraintLayout {
                 toggleUtility(Utility.water);
             }
         });
-
-        //default button
-        water.performClick();
 
         electricity.setOnClickListener(new OnClickListener() {
             @Override
@@ -117,6 +107,7 @@ public class SegmentedControl extends ConstraintLayout {
                 break;
             }
         }
+
         if(delegate != null) {
             delegate.stateChanged();
         }
@@ -139,7 +130,6 @@ public class SegmentedControl extends ConstraintLayout {
                 gas.setTextColor(Color.BLACK);
                 break;
             }
-
         }
     }
 

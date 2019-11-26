@@ -1,6 +1,6 @@
 package com.example.milanease.ui.login;
 
-import com.example.milanease.core.ui.providers.Provider;
+import com.example.milanease.data.model.Provider;
 
 import java.util.List;
 
