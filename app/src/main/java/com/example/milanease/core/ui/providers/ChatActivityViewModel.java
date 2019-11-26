@@ -30,6 +30,8 @@ public class ChatActivityViewModel extends ViewModel {
         initBills();
 
         ChatBot.getInstance().setViewModel(this);
+
+        if (mMessages.getValue().isEmpty())
         addMessage(ChatBot.getInstance().getHelp());
     }
 

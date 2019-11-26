@@ -32,7 +32,6 @@ public class BillPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-//        return view.equals(object);
         return view == object;
     }
 

@@ -25,7 +25,6 @@ public class BillsFragment extends Fragment implements SegmentedControlInterface
     private BillPagerAdapter billsAdapter;
     private SegmentedControl segmentedControl;
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -53,7 +52,6 @@ public class BillsFragment extends Fragment implements SegmentedControlInterface
         segmentedControl.setDelegate(this);
 
         billsPager = root.findViewById(R.id.pager_bills);
-
         billsPager.setOffscreenPageLimit(3);
     }
 

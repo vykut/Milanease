@@ -23,48 +23,16 @@ public class Provider implements Comparable<Provider>, Parcelable {
     private String email;
     @Nullable private Contract contract;
 
-    public Provider(String id, String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description, String email) {
-        this.id = id;
-        this.name = name;
-        this.utilities = utilities;
-        this.logoLarge = logoLarge;
-        this.logoSmall = logoSmall;
-        this.phone = phone;
-        this.description = description;
-        this.email = email;
-        contract = null;
-    }
-
     public Provider(String id, String name, List<Utility> utilities, int logoLarge, int logoSmall, String phone, String description, String email, @Nullable Contract contract) {
-        this.id = id;
         this.name = name;
+        this.id = id;
         this.utilities = utilities;
         this.logoLarge = logoLarge;
         this.logoSmall = logoSmall;
         this.phone = phone;
-        this.email = email;
         this.description = description;
+        this.email = email;
         this.contract = contract;
-    }
-
-    public Provider(boolean contract) {
-        this.id = "0001";
-        this.name = "Enel";
-
-        List<Utility> utilities = new ArrayList<>();
-        utilities.add(Utility.electricity);
-
-        this.utilities = utilities;
-        this.logoLarge = R.drawable.ic_enel_logo_large;
-        this.logoSmall = R.drawable.ic_enel_logo_small;
-        this.phone = "0800070809";
-        this.email = "www.enel.ro";
-        this.description = "În România, Grupul Enel deserveşte 2,8 milioane de clienţi prin reţeaua sa de furnizare şi distribuţie, iar Enel Green Power deţine şi operează centrale de producţie a energiei din surse regenerabile.";
-        if(contract) {
-            this.contract = new Contract();
-        } else {
-            this.contract = null;
-        }
     }
 
     public Provider() {

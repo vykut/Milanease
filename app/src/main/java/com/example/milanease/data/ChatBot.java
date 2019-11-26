@@ -41,7 +41,10 @@ public class ChatBot {
         List<Message> messages = new ArrayList<>();
 
         if (message.getMessage().contains(BILL_TOTAL_MESSAGE))
-            messages.add(new Message(provider.getID(), getBillTotal(), MessageState.received));
+            if (provider.getContract() != null)
+                messages.add(new Message(provider.getID(), getBillTotal(), MessageState.received));
+            else //to add reponse from new contract
+                messages.add(new Message(provider.getID(), "You don't have a contract with us.", MessageState.received));
 
         if (message.getMessage().contains(CONTRACT_NEW_MESSAGE)) {
             if (provider.getContract() != null)
@@ -97,7 +100,7 @@ public class ChatBot {
         //for each utility display latest bill
         List<Bill> bills = chatActivityViewModel.getBills();
         for (Bill bill : bills) {
-            billTotal = String.format("%s%s: %s, due on %s", billTotal, bill.getUtility().toString(), bill.displayPrice(), bill.getDueDate());
+            billTotal = String.format("%s%s: %s, due in %s", billTotal, bill.getUtility().toString(), bill.displayPrice(), bill.getDueDate());
         }
         return billTotal;
     }

@@ -50,10 +50,10 @@ public class Bill implements Comparable<Bill> {
 
     public String displayQuantity() {
         switch (utility) {
-            case electricity: { return quantity + "kW"; }
-            case water: { return quantity + "L"; }
-            case gas: { return quantity + "Smc";}
-            default: { return "Bill.displayQuantity() - default switch"; }
+            case electricity: { return Double.valueOf(quantity).intValue() + "kWh"; }
+            case water: { return Double.valueOf(quantity).intValue() + "L"; }
+            case gas: { return Double.valueOf(quantity).intValue() + "m3";}
+            default: { return "Bill.displayQuantity() - default case switch"; }
         }
     }
 
