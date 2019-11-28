@@ -59,6 +59,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.example.milanease.core.ui.dashboard.CostComparison
+                android:id="@+id/exchange_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

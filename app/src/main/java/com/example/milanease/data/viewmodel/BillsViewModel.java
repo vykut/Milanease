@@ -1,4 +1,4 @@
-package com.example.milanease.core.ui.Bills;
+package com.example.milanease.data.viewmodel;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
@@ -6,10 +6,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.example.milanease.core.ui.bills.Bill;
 import com.example.milanease.core.ui.dashboard.Utility;
 import com.example.milanease.data.RepositoryManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BillsViewModel extends ViewModel {

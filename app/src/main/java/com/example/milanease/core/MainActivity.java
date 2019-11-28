@@ -2,11 +2,8 @@ package com.example.milanease.core;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Toast;
 
-import com.example.milanease.core.ui.Bills.BillsFragment;
+import com.example.milanease.core.ui.bills.BillsFragment;
 import com.example.milanease.core.ui.dashboard.DashboardFragment;
 import com.example.milanease.core.ui.providers.ProvidersFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,24 +13,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.example.milanease.R;
 
-
 public class MainActivity extends AppCompatActivity {
 
-
-    //maybe save instance of every tab
-    private Bundle dashboardInstance = null;
-    private Bundle billsInstance = null;
-    private Bundle providersInstance = null;
-
     private Fragment selectedFragment = null;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNav = findViewById(R.id.tab_view);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        bottomNavigationView = findViewById(R.id.tab_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         reloadInstance(savedInstanceState);
     }
@@ -51,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    if (item.getItemId() == bottomNavigationView.getSelectedItemId())
+                        return false;
 
                     switch (item.getItemId()) {
                         case R.id.tab_bills:
@@ -77,5 +70,4 @@ public class MainActivity extends AppCompatActivity {
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
-
 }

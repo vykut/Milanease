@@ -1,4 +1,4 @@
-package com.example.milanease.core.ui.Bills;
+package com.example.milanease.core.ui.bills;
 
 import com.example.milanease.core.ui.dashboard.Utility;
 

@@ -1,4 +1,4 @@
-package com.example.milanease.core.ui.Bills;
+package com.example.milanease.core.ui.bills;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +15,7 @@ import com.example.milanease.R;
 import com.example.milanease.core.ui.SegmentedControlInterface;
 import com.example.milanease.core.ui.dashboard.SegmentedControl;
 import com.example.milanease.core.ui.dashboard.Utility;
+import com.example.milanease.data.viewmodel.BillsViewModel;
 
 import java.util.List;
 

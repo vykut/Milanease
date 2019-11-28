@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.milanease.R;
 import com.example.milanease.data.model.Contract;
 import com.example.milanease.data.model.Provider;
+import com.example.milanease.data.viewmodel.ProviderActivityViewModel;
 
 public class ProviderActivity extends AppCompatActivity {
 
@@ -70,7 +71,7 @@ public class ProviderActivity extends AppCompatActivity {
             contractName.setText(provider.getContract().getName());
             btnContract.setImageResource(R.drawable.download_24dp);
         } else {
-            contractName.setText("Add a contract now");
+            contractName.setText((R.string.activity_provider_add_contract));
             btnContract.setImageResource(R.drawable.add_24dp);
         }
 
@@ -96,8 +97,11 @@ public class ProviderActivity extends AppCompatActivity {
         btnContract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
-                providerActivityViewModel.addContract(new Contract());
+
+                //open form activity
+//                providerActivityViewModel.addContract(new Contract());
+
+
             }
         });
 

@@ -2,6 +2,8 @@ package com.example.milanease.core.ui.dashboard;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -9,11 +11,18 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 import com.example.milanease.R;
+import com.example.milanease.core.ui.dashboard.widgets.TodayUsageWidget;
+import com.google.gson.internal.Primitives;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class TodayUsage extends CardView {
 
-    TextView todayQuantity;
-    TextView todayMeasureUnit;
+    private TextView todayQuantity;
+    private TextView todayMeasureUnit;
+    private ProgressBar progressBar;
+    private View container;
 
     public TodayUsage(@NonNull Context context) {
         super(context);
@@ -39,6 +48,8 @@ public class TodayUsage extends CardView {
     private void initComponents() {
         todayQuantity = findViewById(R.id.today_quantity_used);
         todayMeasureUnit = findViewById(R.id.today_unit_of_measure);
+        progressBar = findViewById(R.id.today_usage_progress_bar);
+        container = findViewById(R.id.today_usage_container);
     }
 
     public void setTodayQuantity(Double todayQuantity) {
@@ -47,5 +58,21 @@ public class TodayUsage extends CardView {
 
     public void setTodayMeasureUnit(String measureUnit) {
         this.todayMeasureUnit.setText(measureUnit);
+    }
+
+    public void fetch(boolean fetch) {
+        if (fetch) {
+            progressBar.setVisibility(VISIBLE);
+            container.setVisibility(INVISIBLE);
+        } else {
+            progressBar.setVisibility(INVISIBLE);
+            container.setVisibility(VISIBLE);
+        }
+    }
+
+    public void updateUI(TodayUsageWidget todayUsageWidget) {
+        int usage = Double.valueOf(todayUsageWidget.getTodayQuantity()).intValue();
+        todayQuantity.setText(String.valueOf(usage));
+        todayMeasureUnit.setText(todayUsageWidget.getTodayMeasureUnit());
     }
 }

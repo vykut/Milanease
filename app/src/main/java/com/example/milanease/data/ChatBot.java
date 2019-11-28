@@ -1,7 +1,7 @@
 package com.example.milanease.data;
 
-import com.example.milanease.core.ui.Bills.Bill;
-import com.example.milanease.core.ui.providers.ChatActivityViewModel;
+import com.example.milanease.core.ui.bills.Bill;
+import com.example.milanease.data.viewmodel.ChatActivityViewModel;
 import com.example.milanease.core.ui.providers.MessageState;
 import com.example.milanease.data.model.Provider;
 import com.example.milanease.data.model.Message;

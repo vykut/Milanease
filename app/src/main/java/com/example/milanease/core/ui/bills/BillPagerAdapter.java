@@ -1,4 +1,4 @@
-package com.example.milanease.core.ui.Bills;
+package com.example.milanease.core.ui.bills;
 
 import android.content.Context;
 import android.view.LayoutInflater;

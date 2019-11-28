@@ -56,10 +56,13 @@ public class ProviderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
 
         private void displayUtilities(List<Utility> utilities) {
+            StringBuilder text = new StringBuilder();
             for(Utility utility : utilities) {
-                this.utilities.setText(utility.toString() + ", ");
+                text.append(utility.toString());
+                text.append(", ");
             }
-            this.utilities.setText(this.utilities.getText().subSequence(0, this.utilities.getText().length() - 2));
+            text.setLength(text.length() - 2);
+            this.utilities.setText(text.toString());
         }
     }
 

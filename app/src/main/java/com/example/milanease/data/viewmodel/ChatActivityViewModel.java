@@ -1,4 +1,4 @@
-package com.example.milanease.core.ui.providers;
+package com.example.milanease.data.viewmodel;
 
 import android.text.TextUtils;
 
@@ -6,8 +6,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.milanease.core.ui.Bills.Bill;
+import com.example.milanease.core.ui.bills.Bill;
 import com.example.milanease.core.ui.dashboard.Utility;
+import com.example.milanease.core.ui.providers.MessageState;
 import com.example.milanease.data.ChatBot;
 import com.example.milanease.data.RepositoryManager;
 import com.example.milanease.data.model.Message;

@@ -11,8 +11,12 @@ public class Contract implements Parcelable {
     private String clientName;
     private String clientAddress;
 
-    public Contract() {
-        name = "Enel - Family Plan";
+    public Contract(String name, String providerID, String clientID, String clientName, String clientAddress) {
+        this.name = name;
+        this.providerID = providerID;
+        this.clientID = clientID;
+        this.clientName = clientName;
+        this.clientAddress = clientAddress;
     }
 
     public Contract(Parcel in) {

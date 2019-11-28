@@ -22,4 +22,5 @@
     <string name="water">Water</string>
     <string name="today">Today</string>
     <string name="last_updated">updated 15 mins ago</string>
+    <string name="activity_provider_add_contract">Add a contract now</string>
 </resources>

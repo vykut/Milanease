@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milanease.R;
 import com.example.milanease.data.model.Provider;
+import com.example.milanease.data.viewmodel.ProvidersFragmentViewModel;
 
 import java.util.List;
 

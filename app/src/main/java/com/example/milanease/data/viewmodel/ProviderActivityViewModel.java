@@ -1,4 +1,4 @@
-package com.example.milanease.core.ui.providers;
+package com.example.milanease.data.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

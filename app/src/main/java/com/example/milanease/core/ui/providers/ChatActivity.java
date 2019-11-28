@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.example.milanease.R;
 import com.example.milanease.data.model.Message;
 import com.example.milanease.data.model.Provider;
+import com.example.milanease.data.viewmodel.ChatActivityViewModel;
 
 import java.util.List;
 
@@ -57,6 +59,16 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         editText = findViewById(R.id.activity_chat_edit_text);
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    sendMessage();
+                    return true;
+                }
+                return false;
+            }
+        });
         send = findViewById(R.id.activity_chat_btn_send);
     }
 
@@ -74,12 +86,16 @@ public class ChatActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chatActivityViewModel.sendMessage(editText.getText().toString());
-                editText.getText().clear();
+                sendMessage();
             }
         });
 
         initActionBar(provider);
+    }
+
+    private void sendMessage() {
+        chatActivityViewModel.sendMessage(editText.getText().toString());
+        editText.getText().clear();
     }
 
     private void initActionBar(Provider provider) {
