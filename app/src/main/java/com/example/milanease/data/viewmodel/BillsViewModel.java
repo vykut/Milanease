@@ -56,4 +56,8 @@ public class BillsViewModel extends ViewModel {
             }
         });
     }
+
+    public MutableLiveData<Utility> getUtility() {
+        return mUtility;
+    }
 }

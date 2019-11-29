@@ -42,7 +42,7 @@ public class BillPagerAdapter extends PagerAdapter {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.bill_card, container, false);
         initCard(view, position);
-        container.addView(view, position);
+        container.addView(view, 0);
         return view;
     }
 

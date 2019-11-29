@@ -7,4 +7,7 @@
     <color name="utility_water">#2B9EB3</color>
     <color name="utility_gas">#F8333C</color>
     <color name="utility_electricity">#FF9300</color>
+    <color name="utility_water_transparent">#802B9EB3</color>
+    <color name="utility_gas_transparent">#80F8333C</color>
+    <color name="utility_electricity_transparent">#80FF9300</color>
 </resources>

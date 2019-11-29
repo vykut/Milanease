@@ -27,4 +27,12 @@ public enum Utility {
             default: return R.color.utility_electricity;
         }
     }
+
+    public int getColorTransparent() {
+        switch (this) {
+            case water: return R.color.utility_water_transparent;
+            case gas: return R.color.utility_gas_transparent;
+            default: return R.color.utility_electricity_transparent;
+        }
+    }
 }
