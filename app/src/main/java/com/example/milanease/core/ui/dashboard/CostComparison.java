@@ -9,18 +9,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.milanease.R;
 import com.example.milanease.core.ui.dashboard.widgets.CostWidget;
 
 import java.util.Locale;
 
-public class CostComparison extends CardView {
+public class CostComparison extends ConstraintLayout {
 
     private TextView finalUsage;
     private TextView finalCost;
     private ProgressBar progressBar;
     private View container;
+    private CardView cardView;
 
     public CostComparison(@NonNull Context context) {
         super(context);
@@ -44,6 +46,7 @@ public class CostComparison extends CardView {
     }
 
     private void initComponents() {
+        cardView = findViewById(R.id.exchange_card_card_view);
         finalUsage = findViewById(R.id.final_usage);
         finalCost = findViewById(R.id.final_cost);
         progressBar = findViewById(R.id.exchange_card_progress_bar);
@@ -73,5 +76,7 @@ public class CostComparison extends CardView {
         finalCost.setText(cost);
         String usage = costWidget.getTotalUsage() + costWidget.getUsageMeasureUnit();
         finalUsage.setText(usage);
+
+        cardView.setCardBackgroundColor(getResources().getColor(costWidget.getUtility().getColor()));
     }
 }

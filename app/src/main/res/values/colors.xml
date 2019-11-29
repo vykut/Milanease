@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="translucent_black">#4D000000</color>
+    <color name="utility_water">#2B9EB3</color>
+    <color name="utility_gas">#F8333C</color>
+    <color name="utility_electricity">#FF9300</color>
 </resources>

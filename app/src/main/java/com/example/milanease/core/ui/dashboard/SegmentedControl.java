@@ -20,6 +20,7 @@ public class SegmentedControl extends ConstraintLayout {
     private Utility state;
     @Nullable private SegmentedControlInterface delegate;
 
+    @Nullable
     public void setDelegate(SegmentedControlInterface delegate) {
         this.delegate = delegate;
     }
@@ -75,7 +76,7 @@ public class SegmentedControl extends ConstraintLayout {
         switch (utility) {
             case water: {
                 water.setTextColor(Color.WHITE);
-                water.setBackgroundResource(R.drawable.btn_border_selected);
+                water.setBackgroundResource(R.color.utility_water);
                 state = Utility.water;
 
                 toggleButton(Utility.gas);
@@ -86,7 +87,7 @@ public class SegmentedControl extends ConstraintLayout {
             }
             case gas: {
                 gas.setTextColor(Color.WHITE);
-                gas.setBackgroundResource(R.drawable.btn_border_selected);
+                gas.setBackgroundResource(R.color.utility_gas);
                 state = Utility.gas;
 
                 toggleButton(Utility.water);
@@ -97,7 +98,7 @@ public class SegmentedControl extends ConstraintLayout {
             }
             case electricity: {
                 electricity.setTextColor(Color.WHITE);
-                electricity.setBackgroundResource(R.drawable.btn_border_selected);
+                electricity.setBackgroundResource(R.color.utility_electricity);
                 state = Utility.electricity;
 
                 toggleButton(Utility.gas);

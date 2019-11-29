@@ -1,12 +1,15 @@
 package com.example.milanease.core.ui.providers;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.NavUtils;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -24,12 +27,13 @@ public class ProviderActivity extends AppCompatActivity {
 
     private ImageView logo;
     private TextView name;
-    private ImageButton btnCall;
-    private ImageButton btnMessage;
+    private CardView btnCall;
+    private CardView btnMessage;
     private TextView description;
     private TextView contractName;
     private ImageButton btnContract;
     private ProviderActivityViewModel providerActivityViewModel;
+    private CardView contractCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,7 @@ public class ProviderActivity extends AppCompatActivity {
         description = findViewById(R.id.activity_provider_description);
         contractName = findViewById(R.id.activity_provider_contract_name);
         btnContract = findViewById(R.id.activity_provider_contract_btn);
+        contractCardView = findViewById(R.id.activity_provider_contract_container);
     }
 
     private void initProviderUI(final Provider provider) {
@@ -105,13 +110,23 @@ public class ProviderActivity extends AppCompatActivity {
             }
         });
 
-        setActionBarTitle(provider.getName());
+        int res;
+        switch (provider.getUtilities().get(0)) {
+            case water: res = R.drawable.btn_download_water; break;
+            case gas: res = R.drawable.btn_download_gas; break;
+            default: res = R.drawable.btn_download_electricity;
+        }
+        btnMessage.setBackgroundResource(res);
+        btnCall.setBackgroundResource(res);
+
+        int color = getResources().getColor(provider.getUtilities().get(0).getColor());
+        contractCardView.setCardBackgroundColor(color);
+        setActionBar(provider.getName(), color);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
+        if(item.getItemId() == android.R.id.home) {
                 Intent intent = NavUtils.getParentActivityIntent(this);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 NavUtils.navigateUpTo(this, intent);
@@ -120,7 +135,9 @@ public class ProviderActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setActionBarTitle(String title) {
+    public void setActionBar(String title, int color) {
         getSupportActionBar().setTitle(title);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
+        getWindow().setStatusBarColor(color);
     }
 }

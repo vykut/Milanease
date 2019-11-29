@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -107,18 +108,21 @@ public class ChatActivity extends AppCompatActivity {
             imageView.setImageResource(provider.getLogoSmall());
             TextView textView = findViewById(R.id.chat_action_bar_title);
             textView.setText(provider.getName());
+            ColorDrawable colorDrawable = new ColorDrawable(getResources().getColor(provider.getUtilities().get(0).getColor()));
+            getSupportActionBar().setBackgroundDrawable(colorDrawable);
+            getWindow().setStatusBarColor(getResources().getColor(provider.getUtilities().get(0).getColor()));
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
+
+            if(item.getItemId() == android.R.id.home) {
                 Intent intent = NavUtils.getParentActivityIntent(this);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 NavUtils.navigateUpTo(this, intent);
                 return true;
-        }
+            }
         return super.onOptionsItemSelected(item);
     }
 }

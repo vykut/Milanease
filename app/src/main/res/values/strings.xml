@@ -17,10 +17,20 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="electricity">Electricity</string>
-    <string name="gas">Gas</string>
-    <string name="water">Water</string>
+    <string name="segmented_control_electricity">Electricity</string>
+    <string name="segmented_control_gas">Gas</string>
+    <string name="segmented_control_water">Water</string>
     <string name="today">Today</string>
     <string name="last_updated">updated 15 mins ago</string>
     <string name="activity_provider_add_contract">Add a contract now</string>
+    <string name="bill_card_total_consumption">Total consumption</string>
+    <string name="bill_card_pdf">PDF</string>
+    <string name="today_vs_yesterday_today">today</string>
+    <string name="today_vs_yesterday_consumed">You have consumed</string>
+    <string name="today_vs_yesterday_yesterday">yesterday</string>
+    <string name="exchange_card_this_month">This month</string>
+    <string name="activity_chat_hint">Enter message</string>
+    <string name="activity_chat_send">SEND</string>
+    <string name="enel">Enel</string>
+    <string name="activity_provider_contract">Contract</string>
 </resources>

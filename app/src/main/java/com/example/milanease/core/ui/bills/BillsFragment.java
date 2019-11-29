@@ -15,6 +15,7 @@ import com.example.milanease.R;
 import com.example.milanease.core.ui.SegmentedControlInterface;
 import com.example.milanease.core.ui.dashboard.SegmentedControl;
 import com.example.milanease.core.ui.dashboard.Utility;
+import com.example.milanease.data.model.Bill;
 import com.example.milanease.data.viewmodel.BillsViewModel;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public class BillsFragment extends Fragment implements SegmentedControlInterface
     }
 
     private void initAdapter(List<Bill> bills) {
-            billsAdapter = new BillPagerAdapter(bills, getContext());
+            billsAdapter = new BillPagerAdapter(bills, getContext(), segmentedControl.getState());
             billsPager.setAdapter(billsAdapter);
     }
 

@@ -1,4 +1,4 @@
-package com.example.milanease.core.ui.bills;
+package com.example.milanease.data.model;
 
 import com.example.milanease.core.ui.dashboard.Utility;
 
@@ -7,18 +7,18 @@ import java.util.Locale;
 
 public class Bill implements Comparable<Bill> {
 
+    private Utility utility;
     private String providerID;
     private double price;
     private Calendar period;
     private double quantity;
-    private Utility utility;
 
-    public Bill(Utility utility) {
-        this.providerID = "0001";
-        this.price = 75;
-        this.period = Calendar.getInstance();
-        this.quantity = 550;
+    public Bill(Utility utility, String providerID, double price, Calendar period, double quantity) {
         this.utility = utility;
+        this.providerID = providerID;
+        this.price = price;
+        this.period = period;
+        this.quantity = quantity;
     }
 
     public double getPrice() {
@@ -39,6 +39,7 @@ public class Bill implements Comparable<Bill> {
 
     public String getDueDate() {
         period.roll(Calendar.MONTH, true);
+        String s = period.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         String dueDate = period.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         period.roll(Calendar.MONTH, false);
         return dueDate;
@@ -50,9 +51,9 @@ public class Bill implements Comparable<Bill> {
 
     public String displayQuantity() {
         switch (utility) {
-            case electricity: { return Double.valueOf(quantity).intValue() + "kWh"; }
-            case water: { return Double.valueOf(quantity).intValue() + "L"; }
-            case gas: { return Double.valueOf(quantity).intValue() + "m3";}
+            case electricity: { return Double.valueOf(quantity).intValue() + " kiloWatts / hour"; }
+            case water:
+            case gas: { return Double.valueOf(quantity).intValue() + " cubic meters";}
             default: { return "Bill.displayQuantity() - default case switch"; }
         }
     }
@@ -62,17 +63,17 @@ public class Bill implements Comparable<Bill> {
         String string = "";
         switch (utility) {
             case water: {
-                multiplier = 4.227;
+                multiplier = 4.227 * 1000;
                 string = "cups";
                 break;
             }
             case gas: {
-                multiplier = 15.454;
+                multiplier = 2.345;
                 string = "kgs of CO2 released in atmosphere";
                 break;
             }
             case electricity: {
-                multiplier = 1.101;
+                multiplier = 88.1;
                 string = "phone charges";
                 break;
             }

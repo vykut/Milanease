@@ -33,13 +33,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/provider_linear_layout"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
@@ -55,24 +51,30 @@
                 android:id="@+id/provider_linear_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/provider_image"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/provider_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Enel"
                     android:textColor="#000000"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    tools:text="Enel" />
 
                 <TextView
                     android:id="@+id/provider_utilities"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/electricity" />
+                    android:text="@string/segmented_control_electricity" />
             </LinearLayout>
 
             <ImageView

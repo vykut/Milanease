@@ -1,5 +1,9 @@
 package com.example.milanease.core.ui.dashboard;
 
+import android.graphics.Color;
+
+import com.example.milanease.R;
+
 import java.util.Random;
 
 public enum Utility {
@@ -13,6 +17,14 @@ public enum Utility {
             case 0: return Utility.water;
             case 1: return Utility.gas;
             default: return Utility.electricity;
+        }
+    }
+
+    public int getColor() {
+        switch (this) {
+            case water: return R.color.utility_water;
+            case gas: return R.color.utility_gas;
+            default: return R.color.utility_electricity;
         }
     }
 }

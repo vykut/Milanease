@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.example.milanease.core.ui.bills.Bill;
+import com.example.milanease.data.model.Bill;
 import com.example.milanease.core.ui.dashboard.Utility;
 import com.example.milanease.data.RepositoryManager;
 

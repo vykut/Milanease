@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.milanease.core.ui.bills.Bill;
+import com.example.milanease.data.model.Bill;
 import com.example.milanease.core.ui.dashboard.Utility;
 import com.example.milanease.core.ui.providers.MessageState;
 import com.example.milanease.data.ChatBot;
@@ -16,6 +16,7 @@ import com.example.milanease.data.model.Provider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class ChatActivityViewModel extends ViewModel {
@@ -83,6 +84,7 @@ public class ChatActivityViewModel extends ViewModel {
     }
 
     private void initBills() {
+        //should implement live data
         List<Bill> allBills = repositoryManager.getBills().getValue();
         bills = new ArrayList<>();
 
@@ -92,5 +94,6 @@ public class ChatActivityViewModel extends ViewModel {
                     bills.add(bill);
                     break;
                 }
+
     }
 }

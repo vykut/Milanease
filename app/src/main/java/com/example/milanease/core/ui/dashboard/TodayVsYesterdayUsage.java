@@ -9,13 +9,16 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.milanease.R;
 import com.example.milanease.core.ui.dashboard.widgets.TodayVsYesterdayUsageWidget;
 
-public class TodayVsYesterdayUsage extends CardView {
+public class TodayVsYesterdayUsage extends ConstraintLayout {
 
+    private TextView today;
+    private TextView yesterday;
+    private TextView consumed;
     private TextView percentage;
     private ImageView upDown;
     private TextView interpretation;
@@ -38,17 +41,21 @@ public class TodayVsYesterdayUsage extends CardView {
     }
 
     private void init(@NonNull Context context) {
-        inflate(context, R.layout.today_vs_yesterday, this);
+        inflate(context, R.layout.today_vs_yesterday_linear_layout, this);
 
         initComponents();
     }
 
     private void initComponents() {
-        percentage = findViewById(R.id.percent);
-        upDown = findViewById(R.id.upDown);
-        interpretation = findViewById(R.id.interpretation);
+        percentage = findViewById(R.id.today_vs_yesterday_percent);
+        upDown = findViewById(R.id.today_vs_yesterday_up_down);
+        interpretation = findViewById(R.id.today_vs_yesterday_interpretation);
         progressBar = findViewById(R.id.today_vs_yesterday_progress_bar);
         container = findViewById(R.id.today_vs_yesterday_container);
+
+        today = findViewById(R.id.today_vs_yesterday_today);
+        yesterday = findViewById(R.id.today_vs_yesterday_yesterday);
+        consumed = findViewById(R.id.today_vs_yesterday_consumed);
     }
 
     public void setPercentage(Double percentage) {
@@ -89,6 +96,18 @@ public class TodayVsYesterdayUsage extends CardView {
         percentage.setText(String.valueOf(todayVsYesterdayUsageWidget.getPercentage()).concat("%"));
         setUpDown(todayVsYesterdayUsageWidget.isMoreThanYesterday());
         interpretation.setText(interpret(todayVsYesterdayUsageWidget.isMoreThanYesterday(), todayVsYesterdayUsageWidget.getUtility()));
+
+        updateTextColor(todayVsYesterdayUsageWidget.getUtility().getColor());
+
+    }
+
+    private void updateTextColor(int color) {
+        int textColor = getResources().getColor(color);
+        interpretation.setTextColor(textColor);
+        percentage.setTextColor(textColor);
+        today.setTextColor(textColor);
+        yesterday.setTextColor(textColor);
+        consumed.setTextColor(textColor);
     }
 
 }

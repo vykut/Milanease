@@ -29,7 +29,6 @@ public class DashboardViewModel extends ViewModel {
             }
         });
 
-
         fetchDashboardModel();
     }
 
@@ -52,5 +51,7 @@ public class DashboardViewModel extends ViewModel {
         mUtility.setValue(utility);
     }
 
-
+    public LiveData<Utility> getUtility() {
+        return mUtility;
+    }
 }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.milanease.R;
 import com.example.milanease.core.ui.dashboard.widgets.TodayUsageWidget;
@@ -17,12 +18,13 @@ import com.google.gson.internal.Primitives;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class TodayUsage extends CardView {
+public class TodayUsage extends ConstraintLayout {
 
     private TextView todayQuantity;
     private TextView todayMeasureUnit;
     private ProgressBar progressBar;
     private View container;
+    private CardView cardView;
 
     public TodayUsage(@NonNull Context context) {
         super(context);
@@ -46,6 +48,7 @@ public class TodayUsage extends CardView {
     }
 
     private void initComponents() {
+        cardView = findViewById(R.id.today_usage_card_view);
         todayQuantity = findViewById(R.id.today_quantity_used);
         todayMeasureUnit = findViewById(R.id.today_unit_of_measure);
         progressBar = findViewById(R.id.today_usage_progress_bar);
@@ -74,5 +77,8 @@ public class TodayUsage extends CardView {
         int usage = Double.valueOf(todayUsageWidget.getTodayQuantity()).intValue();
         todayQuantity.setText(String.valueOf(usage));
         todayMeasureUnit.setText(todayUsageWidget.getTodayMeasureUnit());
+
+
+        cardView.setCardBackgroundColor(getResources().getColor(todayUsageWidget.getUtility().getColor()));
     }
 }

@@ -16,199 +16,202 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
-
-    <ImageView
-        android:id="@+id/activity_provider_logo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="4dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_enel_logo_large"
-        tools:srcCompat="@drawable/ic_enel_logo_large" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/provider_logo_gradient"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_provider_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/activity_provider_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Enel"
-        android:textColor="#000000"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6">
-
-        <ImageButton
-            android:id="@+id/activity_provider_btn_call"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/btn_download"
-            android:scaleType="center"
-            app:layout_constraintBaseline_toBaselineOf="@+id/activity_provider_btn_message"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/phone_24dp"
-            tools:src="@drawable/phone_24dp" />
-
-        <ImageButton
-            android:id="@+id/activity_provider_btn_message"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/btn_download"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/message_24dp"
-            app:srcCompat="@drawable/message_24dp"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/activity_provider_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="În România, Grupul Enel deserveşte 2,8 milioane de clienţi prin reţeaua sa de furnizare şi distribuţie, iar Enel Green Power deţine şi operează centrale de producţie a energiei din surse regenerabile."
-                android:textColor="#000000"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="20dp"
-        app:cardBackgroundColor="#000000"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.0">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="#F3F3F3">
 
-            <TextView
-                android:id="@+id/textView10"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Contract"
-                android:textColor="#B3FFFFFF"
-                android:textSize="15sp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <ImageView
+                android:id="@+id/activity_provider_logo"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/guideline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_enel_logo_large"
+                tools:srcCompat="@drawable/ic_enel_logo_large" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/provider_logo_gradient"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_provider_logo"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/activity_provider_contract_name"
+                android:id="@+id/activity_provider_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="Enel Family"
-                android:textColor="#FFFFFF"
-                android:textSize="28sp"
+                android:text="@string/enel"
+                android:textColor="#000000"
+                android:textSize="32sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/guideline6"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <ImageButton
-                android:id="@+id/activity_provider_contract_btn"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline6">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/activity_provider_btn_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_download"
+                    android:foreground="@drawable/phone_24dp"
+                    android:foregroundGravity="center"
+                    app:cardBackgroundColor="@android:color/black"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="6dp">
+
+                </androidx.cardview.widget.CardView>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/activity_provider_btn_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_margin="8dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_download"
+                    android:foreground="@drawable/message_24dp"
+                    android:foregroundGravity="center"
+                    app:cardBackgroundColor="@android:color/black"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="6dp" />
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/btn_download"
-                android:scaleType="centerCrop"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/activity_provider_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        tools:text="În România, Grupul Enel deserveşte 2,8 milioane de clienţi prin reţeaua sa de furnizare şi distribuţie, iar Enel Green Power deţine şi operează centrale de producţie a energiei din surse regenerabile." />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/activity_provider_contract_container"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="#000000"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/download_24dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/activity_provider_contract_container_constraint_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/activity_provider_contract"
+                        android:textColor="#B3FFFFFF"
+                        android:textSize="15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/activity_provider_contract_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="#FFFFFF"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:text="Enel Family" />
+
+                    <ImageButton
+                        android:id="@+id/activity_provider_contract_btn"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:srcCompat="@drawable/download_24dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

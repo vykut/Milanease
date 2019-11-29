@@ -72,6 +72,8 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
         todayUsage.updateUI(dashboardModel.getTodayUsageWidget());
         todayVsYesterdayUsage.updateUI(dashboardModel.getTodayVsYesterdayUsageWidget());
         exchangeCard.updateUI(dashboardModel.getCostWidget());
+
+
     }
 
     @Override

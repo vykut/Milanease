@@ -12,17 +12,28 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.milanease.R;
+import com.example.milanease.core.ui.dashboard.Utility;
+import com.example.milanease.data.model.Bill;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class BillPagerAdapter extends PagerAdapter {
 
     private List<Bill> bills;
     private Context context;
+    private int cardRes;
 
-    public BillPagerAdapter(List<Bill> bills, Context context) {
+    public BillPagerAdapter(List<Bill> bills, Context context, Utility utility) {
         this.bills = bills;
         this.context = context;
+
+        switch (utility) {
+            case water: cardRes = R.layout.bill_card_water; break;
+            case gas: cardRes = R.layout.bill_card_gas; break;
+            case electricity: cardRes = R.layout.bill_card_electricity;
+        }
     }
 
     @Override
@@ -39,9 +50,9 @@ public class BillPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.bill_card, container, false);
+        View view = layoutInflater.inflate(cardRes, container, false);
         initCard(view, position);
-        container.addView(view, 0);
+        container.addView(view, position);
         return view;
     }
 

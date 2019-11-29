@@ -21,21 +21,17 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#F3F3F3"
             android:orientation="vertical">
 
             <com.example.milanease.core.ui.dashboard.TodayUsage
                 android:id="@+id/today_usage"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/today_vs_yesterday"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/today_vs_yesterday"
-                />
+                app:layout_constraintTop_toTopOf="@+id/today_vs_yesterday" />
 
 
             <androidx.constraintlayout.widget.Guideline
@@ -49,11 +45,7 @@
                 android:id="@+id/today_vs_yesterday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline2"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -62,7 +54,7 @@
                 android:id="@+id/exchange_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/today_vs_yesterday"
