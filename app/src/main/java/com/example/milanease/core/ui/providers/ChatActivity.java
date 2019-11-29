@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -80,7 +81,8 @@ public class ChatActivity extends AppCompatActivity {
         } else {
             messageAdapter.notifyDataSetChanged();
         }
-        recyclerView.scrollToPosition(messages.size() - 1);
+//        recyclerView.scrollToPosition(messages.size() - 1);
+        recyclerView.smoothScrollToPosition(messages.size() - 1);
     }
 
     private void initUI(final Provider provider) {
@@ -110,7 +112,8 @@ public class ChatActivity extends AppCompatActivity {
             textView.setText(provider.getName());
             ColorDrawable colorDrawable = new ColorDrawable(getResources().getColor(provider.getUtilities().get(0).getColor()));
             getSupportActionBar().setBackgroundDrawable(colorDrawable);
-            getWindow().setStatusBarColor(getResources().getColor(provider.getUtilities().get(0).getColor()));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+                getWindow().setStatusBarColor(getResources().getColor(provider.getUtilities().get(0).getColor()));
         }
     }
 

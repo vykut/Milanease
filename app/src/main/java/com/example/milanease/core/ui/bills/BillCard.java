@@ -41,11 +41,10 @@ public class BillCard extends CardView {
     }
 
     private void initComponents() {
-        totalCost = findViewById(R.id.total_cost);
-        period = findViewById(R.id.period);
-        totalUsage = findViewById(R.id.total_usage);
-        totalUsageExchanged = findViewById(R.id.total_usage_exchanged);
-        btndownload = findViewById(R.id.btn_download);
+        totalCost = findViewById(R.id.bill_card_total_cost);
+        period = findViewById(R.id.bill_card_period);
+        totalUsage = findViewById(R.id.bill_card_total_usage);
+        totalUsageExchanged = findViewById(R.id.bill_card_total_usage_exchanged);
+        btndownload = findViewById(R.id.bill_card_btn_download);
     }
-
 }

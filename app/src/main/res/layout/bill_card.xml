@@ -2,18 +2,17 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-<!--    android:padding="8dp">-->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/bill_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="@drawable/corner_radius"
         android:gravity="center"
-        app:cardCornerRadius="15dp"
+        app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -21,14 +20,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bill_card_card_view_constraint_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/bill_water_border">
 
             <View
-                android:id="@+id/view"
+                android:id="@+id/bill_card_container"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="#000000"
+                android:background="@color/utility_water"
                 app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,30 +43,30 @@
                 app:layout_constraintGuide_percent="0.4" />
 
             <TextView
-                android:id="@+id/total_cost"
+                android:id="@+id/bill_card_total_cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="75€"
                 android:textColor="#FFFFFF"
                 android:textSize="50sp"
-                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintBottom_toBottomOf="@+id/bill_card_container"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.4" />
+                app:layout_constraintVertical_bias="0.4"
+                tools:text="75€" />
 
             <TextView
-                android:id="@+id/period"
+                android:id="@+id/bill_card_period"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jan - Mar"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp"
-                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintBottom_toBottomOf="@+id/bill_card_container"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/total_cost"
-                app:layout_constraintVertical_bias="0.8" />
+                app:layout_constraintTop_toBottomOf="@+id/bill_card_total_cost"
+                app:layout_constraintVertical_bias="0.8"
+                tools:text="Jan - Mar" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -76,12 +77,12 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
-                android:text="Total consumption"
+                android:text="@string/bill_card_total_consumption"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
+                app:layout_constraintTop_toBottomOf="@+id/bill_card_container" />
 
             <View
                 android:id="@+id/divider"
@@ -98,50 +99,55 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <TextView
-                android:id="@+id/total_usage"
+                android:id="@+id/bill_card_total_usage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="20dp"
-                android:text="550 Litres"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:textColor="#000000"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/textView9"
-                app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                tools:text="550 Litres" />
 
             <TextView
-                android:id="@+id/total_usage_exchanged"
+                android:id="@+id/bill_card_total_usage_exchanged"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
-                android:text="2325 cups"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:textColor="#000000"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@+id/total_usage"
-                app:layout_constraintStart_toStartOf="@+id/total_usage"
-                app:layout_constraintTop_toBottomOf="@+id/total_usage" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bill_card_total_usage"
+                tools:text="2325 cups" />
 
             <Button
-                android:id="@+id/btn_download"
+                android:id="@+id/bill_card_btn_download"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/btn_download"
+                android:background="@drawable/btn_download_water"
+                android:drawableEnd="@drawable/download_24dp"
                 android:drawableRight="@drawable/download_24dp"
                 android:padding="10dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="PDF"
+                android:text="@string/bill_card_pdf"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/total_usage_exchanged"
-                app:layout_constraintStart_toStartOf="@+id/total_usage_exchanged"
-                app:layout_constraintTop_toBottomOf="@+id/total_usage_exchanged" />
+                app:layout_constraintEnd_toEndOf="@+id/bill_card_total_usage_exchanged"
+                app:layout_constraintStart_toStartOf="@+id/bill_card_total_usage_exchanged"
+                app:layout_constraintTop_toBottomOf="@+id/bill_card_total_usage_exchanged" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

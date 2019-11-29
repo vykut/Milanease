@@ -48,6 +48,7 @@ public class RepositoryManager {
         NetworkManager.getInstance().getDashboardModel().enqueue(new Callback<List<DashboardModel>>() {
            @Override
            public void onResponse(Call<List<DashboardModel>> call, Response<List<DashboardModel>> response) {
+               if (response.isSuccessful())
                mDashboardModels.setValue(response.body());
            }
 
@@ -63,42 +64,8 @@ public class RepositoryManager {
         return mDashboardModels;
     }
 
-    public LiveData<DashboardModel> getDashboardWidget(final Utility utility) {
-        return Transformations.map(mDashboardModels, new Function<List<DashboardModel>, DashboardModel>() {
-            @Override
-            public DashboardModel apply(List<DashboardModel> input) {
-
-                switch (utility) {
-                    case water: {
-                        return input.get(0);
-                    }
-                    case electricity: {
-                        return input.get(1);
-                    }
-                    default: {
-                        return input.get(2);
-                    }
-                }
-            }
-        });
-    }
-
     public LiveData<List<Bill>> getBills() {
         return mBills;
-    }
-
-    public LiveData<List<Bill>> getSegmentedBills(final Utility utility) {
-        return Transformations.map(mBills, new Function<List<Bill>, List<Bill>>() {
-            @Override
-            public List<Bill> apply(List<Bill> input) {
-                List<Bill> bills = new ArrayList<>();
-                for (Bill bill : input) {
-                    if (bill.getUtility().equals(utility))
-                        bills.add(bill);
-                }
-                return bills;
-            }
-        });
     }
 
     public LiveData<List<Provider>> getProviders() {

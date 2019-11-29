@@ -12,28 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.milanease.R;
-import com.example.milanease.core.ui.dashboard.Utility;
 import com.example.milanease.data.model.Bill;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class BillPagerAdapter extends PagerAdapter {
 
     private List<Bill> bills;
     private Context context;
-    private int cardRes;
 
-    public BillPagerAdapter(List<Bill> bills, Context context, Utility utility) {
+    public BillPagerAdapter(List<Bill> bills, Context context) {
         this.bills = bills;
         this.context = context;
-
-        switch (utility) {
-            case water: cardRes = R.layout.bill_card_water; break;
-            case gas: cardRes = R.layout.bill_card_gas; break;
-            case electricity: cardRes = R.layout.bill_card_electricity;
-        }
     }
 
     @Override
@@ -50,19 +40,28 @@ public class BillPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(cardRes, container, false);
+        View view = layoutInflater.inflate(R.layout.bill_card, container, false);
         initCard(view, position);
         container.addView(view, position);
         return view;
     }
 
     private void initCard(View view, int position) {
-        TextView totalCost = view.findViewById(R.id.total_cost);
-        TextView period = view.findViewById(R.id.period);
-        TextView totalUsage = view.findViewById(R.id.total_usage);
-        TextView totalUsageExchanged = view.findViewById(R.id.total_usage_exchanged);
-        Button btnDownload = view.findViewById(R.id.btn_download);
+        TextView totalCost = view.findViewById(R.id.bill_card_total_cost);
+        TextView period = view.findViewById(R.id.bill_card_period);
+        TextView totalUsage = view.findViewById(R.id.bill_card_total_usage);
+        TextView totalUsageExchanged = view.findViewById(R.id.bill_card_total_usage_exchanged);
+        Button btnDownload = view.findViewById(R.id.bill_card_btn_download);
+        View container = view.findViewById(R.id.bill_card_container);
+        View layoutContainer = view.findViewById(R.id.bill_card_card_view_constraint_layout);
+
         final Bill bill = bills.get(position);
+
+        switch (bill.getUtility()) {
+            case water: container.setBackgroundResource(R.color.utility_water); btnDownload.setBackgroundResource(R.drawable.btn_download_water); layoutContainer.setBackgroundResource(R.drawable.bill_water_border); break;
+            case gas: container.setBackgroundResource(R.color.utility_gas); btnDownload.setBackgroundResource(R.drawable.btn_download_gas); layoutContainer.setBackgroundResource(R.drawable.bill_gas_border); break;
+            case electricity: container.setBackgroundResource(R.color.utility_electricity); btnDownload.setBackgroundResource(R.drawable.btn_download_electricity); layoutContainer.setBackgroundResource(R.drawable.bill_electricity_border);
+        }
 
         totalCost.setText(bill.displayPrice());
         period.setText(bill.displayPeriod());
@@ -73,7 +72,8 @@ public class BillPagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 // to be implemented
-                Toast.makeText(context, bill.displayPrice(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, bill.displayPrice(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "To be implemented", Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -10,6 +10,7 @@ import com.example.milanease.data.model.Bill;
 import com.example.milanease.core.ui.dashboard.Utility;
 import com.example.milanease.data.RepositoryManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BillsViewModel extends ViewModel {
@@ -40,7 +41,18 @@ public class BillsViewModel extends ViewModel {
         mSegmentedBills = Transformations.switchMap(mUtility, new Function<Utility, LiveData<List<Bill>>>() {
             @Override
             public LiveData<List<Bill>> apply(Utility input) {
-                return repositoryManager.getSegmentedBills(input);
+                final Utility utility = input;
+                return Transformations.map(repositoryManager.getBills(), new Function<List<Bill>, List<Bill>>() {
+                    @Override
+                    public List<Bill> apply(List<Bill> input) {
+                        List<Bill> bills = new ArrayList<>();
+                        for (Bill bill : input) {
+                            if (bill.getUtility().equals(utility))
+                                bills.add(bill);
+                        }
+                        return bills;
+                    }
+                });
             }
         });
     }

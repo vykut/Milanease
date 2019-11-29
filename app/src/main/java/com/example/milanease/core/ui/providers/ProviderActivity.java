@@ -11,12 +11,14 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.milanease.R;
 import com.example.milanease.data.model.Contract;
@@ -102,11 +104,7 @@ public class ProviderActivity extends AppCompatActivity {
         btnContract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //open form activity
-//                providerActivityViewModel.addContract(new Contract());
-
-
+                Toast.makeText(getApplicationContext(), "To be implemented", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -138,6 +136,7 @@ public class ProviderActivity extends AppCompatActivity {
     public void setActionBar(String title, int color) {
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
-        getWindow().setStatusBarColor(color);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            getWindow().setStatusBarColor(color);
     }
 }

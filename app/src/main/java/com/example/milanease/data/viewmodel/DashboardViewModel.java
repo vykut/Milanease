@@ -10,6 +10,8 @@ import com.example.milanease.core.ui.dashboard.Utility;
 import com.example.milanease.data.RepositoryManager;
 import com.example.milanease.data.model.DashboardModel;
 
+import java.util.List;
+
 public class DashboardViewModel extends ViewModel {
 
     private LiveData<DashboardModel> mDashboardModel;
@@ -24,8 +26,24 @@ public class DashboardViewModel extends ViewModel {
         mDashboardModel = Transformations.switchMap(mUtility, new Function<Utility, LiveData<DashboardModel>>() {
             @Override
             public LiveData<DashboardModel> apply(Utility input) {
-                mIsFetching.setValue(false);
-                return repositoryManager.getDashboardWidget(input);
+                final Utility utility = input;
+                return Transformations.map(repositoryManager.getDashboardModel(), new Function<List<DashboardModel>, DashboardModel>() {
+                    @Override
+                    public DashboardModel apply(List<DashboardModel> input) {
+                        mIsFetching.setValue(false);
+                        switch (utility) {
+                            case water: {
+                                return input.get(0);
+                            }
+                            case electricity: {
+                                return input.get(1);
+                            }
+                            default: {
+                                return input.get(2);
+                            }
+                        }
+                    }
+                });
             }
         });
 
