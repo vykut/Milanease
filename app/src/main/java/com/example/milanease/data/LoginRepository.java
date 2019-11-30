@@ -1,5 +1,7 @@
 package com.example.milanease.data;
 
+import android.content.Context;
+
 import com.example.milanease.data.model.LoggedInUser;
 
 /**
@@ -9,14 +11,9 @@ import com.example.milanease.data.model.LoggedInUser;
 public class LoginRepository {
 
     private static volatile LoginRepository instance;
-
     private LoginDataSource dataSource;
+    private LoggedInUser user;
 
-    // If user credentials will be cached in local storage, it is recommended it be encrypted
-    // @see https://developer.android.com/training/articles/keystore
-    private LoggedInUser user = new LoggedInUser("157213", "Victor Socaciu", "Str. Dorobanti 10, sector 1, Bucuresti");
-
-    // private constructor : singleton access
     private LoginRepository(LoginDataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -39,15 +36,25 @@ public class LoginRepository {
 
     private void setLoggedInUser(LoggedInUser user) {
         this.user = user;
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<LoggedInUser> login(String username, String password, Context context) {
         // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password);
+        Result<LoggedInUser> result = dataSource.login(username, password, context);
         if (result instanceof Result.Success) {
             setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+        }
+        return result;
+    }
+
+    public Result<LoggedInUser> register(String username, String password, String email, String clientID, Context context) {
+        Result<LoggedInUser> result = dataSource.register(username, password, email, clientID, context);
+        if (result instanceof Result.Success) {
+            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+
+
+
+
         }
         return result;
     }

@@ -9,14 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -25,24 +22,55 @@ import android.widget.Toast;
 
 import com.example.milanease.R;
 import com.example.milanease.core.MainActivity;
-import com.example.milanease.ui.login.LoginViewModel;
-import com.example.milanease.ui.login.LoginViewModelFactory;
+import com.example.milanease.data.PasswordException;
+import com.example.milanease.data.UsernameException;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private TextView title;
+    private EditText usernameEditText;
+    private EditText passwordEditText;
+    private EditText passwordRepeatEditText;
+    private EditText emailEditText;
+    private EditText clientIDEditText;
+    private Button loginButton;
+    private ProgressBar loadingProgressBar;
+
+    //stop registration process
+    private Button backToLoginButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        initComponents();
+
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        loginViewModel.getLogin().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+
+                    //set title
+                    title.setText(R.string.activity_login_login);
+
+                    passwordRepeatEditText.setVisibility(View.GONE);
+                    emailEditText.setVisibility(View.GONE);
+                    clientIDEditText.setVisibility(View.GONE);
+                } else {
+                    title.setText(R.string.login_activity_registration_form);
+                    loginButton.setEnabled(aBoolean);
+                    loginButton.setText(R.string.login_activity_register);
+                    passwordRepeatEditText.setVisibility(View.VISIBLE);
+                    emailEditText.setVisibility(View.VISIBLE);
+                    clientIDEditText.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -50,13 +78,31 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginFormState == null) {
                     return;
                 }
-                loginButton.setEnabled(loginFormState.isDataValid());
+
                 if (loginFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(loginFormState.getUsernameError()));
                 }
                 if (loginFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(loginFormState.getPasswordError()));
                 }
+                if (loginFormState.isDataValid())
+                    loginButton.setEnabled(loginFormState.isDataValid());
+            }
+        });
+
+        loginViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() {
+            @Override
+            public void onChanged(RegisterFormState registerFormState) {
+                if (registerFormState == null) {
+                    return;
+                }
+                loginButton.setEnabled(registerFormState.isDataValid());
+                if (registerFormState.getPasswordError() != null)
+                    passwordRepeatEditText.setError(getString(registerFormState.getPasswordError()));
+                if (registerFormState.getEmailError() != null)
+                    emailEditText.setError(getString(registerFormState.getEmailError()));
+                if (registerFormState.getClientIDError() != null)
+                    clientIDEditText.setError(getString(registerFormState.getClientIDError()));
             }
         });
 
@@ -67,58 +113,90 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 loadingProgressBar.setVisibility(View.GONE);
+
                 if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
+                    showLoginFailed(loginResult.getError().getLocalizedMessage());
+                    if (loginResult.getError() instanceof UsernameException)
+                        loginViewModel.startRegistrationProcess();
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
+                    setResult(Activity.RESULT_OK);
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
-                setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
 
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
 //                finish();
             }
         });
 
-        TextWatcher afterTextChangedListener = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // ignore
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // ignore
-            }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
-            }
-        };
-        usernameEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.addTextChangedListener(afterTextChangedListener);
-        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+    }
 
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
-                }
-                return false;
-            }
-        });
+    private TextWatcher loginTextChangedListener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // ignore
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // ignore
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
+                    passwordEditText.getText().toString());
+        }
+    };
+
+    TextWatcher registrationTextChangedListener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            // ignore
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // ignore
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            loginViewModel.registrationDataChanged(usernameEditText.getText().toString(), passwordEditText.getText().toString(),
+                    passwordRepeatEditText.getText().toString(), emailEditText.getText().toString(),
+                    clientIDEditText.getText().toString());
+        }
+    };
+
+    private void initComponents() {
+        title = findViewById(R.id.activity_login_title);
+        usernameEditText = findViewById(R.id.activity_login_username);
+        passwordEditText = findViewById(R.id.activity_login_password);
+        loginButton = findViewById(R.id.activity_login_btn_login);
+        loadingProgressBar = findViewById(R.id.activity_login_progress_bar);
+        passwordRepeatEditText = findViewById(R.id.activity_login_password_repeat);
+        emailEditText = findViewById(R.id.activity_login_email);
+        clientIDEditText = findViewById(R.id.activity_login_client_id);
+
+        usernameEditText.addTextChangedListener(loginTextChangedListener);
+        passwordEditText.addTextChangedListener(loginTextChangedListener);
+        passwordRepeatEditText.addTextChangedListener(registrationTextChangedListener);
+        emailEditText.addTextChangedListener(registrationTextChangedListener);
+        clientIDEditText.addTextChangedListener(registrationTextChangedListener);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                if (loginViewModel.getLogin().getValue())
+                    loginViewModel.login(usernameEditText.getText().toString(), passwordEditText.getText().toString(), getApplicationContext());
+                else
+                    loginViewModel.register(usernameEditText.getText().toString(), passwordEditText.getText().toString(),
+                            emailEditText.getText().toString(), clientIDEditText.getText().toString(), getApplicationContext());
             }
         });
     }
@@ -129,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
+    private void showLoginFailed(String errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 }

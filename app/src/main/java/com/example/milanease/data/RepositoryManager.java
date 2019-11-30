@@ -2,10 +2,8 @@ package com.example.milanease.data;
 
 import android.util.Log;
 
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
 
 import com.example.milanease.R;
 import com.example.milanease.data.model.Bill;
@@ -143,11 +141,11 @@ public class RepositoryManager {
     private void initProviders() {
         List<Provider> providers = new ArrayList<>();
 
-        String userID = LoginRepository.getInstance(new LoginDataSource()).getUser().getUserId();
+        String userID = LoginRepository.getInstance(new LoginDataSource()).getUser().getClientID();
         String userName = LoginRepository.getInstance(new LoginDataSource()).getUser().getDisplayName();
-        String address = LoginRepository.getInstance(new LoginDataSource()).getUser().getAddress();
-        Contract enelContract = new Contract("Enel Simplu Anual", "0001", userID, userName, address);
-        Contract apaNovaContract = new Contract("Apa Nova furnizare apa potabila", "0005", userID, userName, address);
+//        String address = LoginRepository.getInstance(new LoginDataSource()).getUser().getAddress();
+        Contract enelContract = new Contract("Enel Simplu Anual", "0001", userID, userName/*, address*/);
+        Contract apaNovaContract = new Contract("Apa Nova furnizare apa potabila", "0005", userID, userName/*, address*/);
 
         List<Utility> eUtilities = new ArrayList<>();
         eUtilities.add(Utility.electricity);

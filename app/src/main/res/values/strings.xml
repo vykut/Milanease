@@ -5,8 +5,10 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
+    <string name="welcome">"Welcome "</string>
+    <string name="invalid_username">Username must be >5 characters</string>
+    <string name="invalid_client_id">Client ID must be 8 digits long</string>
+    <string name="invalid_email">Not a valid email</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="dashboard_tab">Dashboard</string>
@@ -33,4 +35,11 @@
     <string name="activity_chat_send">SEND</string>
     <string name="enel">Enel</string>
     <string name="activity_provider_contract">Contract</string>
+    <string name="activity_login_email">E-mail</string>
+    <string name="activity_login_login">Login</string>
+    <string name="activity_login_repeat_password">Repeat password</string>
+    <string name="activity_login_client_id">Client ID</string>
+    <string name="passwords_dont_match">Passwords don\'t match</string>
+    <string name="login_activity_register">Register</string>
+    <string name="login_activity_registration_form">Registration form</string>
 </resources>

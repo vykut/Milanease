@@ -5,32 +5,25 @@ package com.example.milanease.data.model;
  */
 public class LoggedInUser {
 
-    private String userId;
+    private String email;
+    private String clientID;
     private String displayName;
-    private String address;
 
-    public LoggedInUser(String userId, String displayName) {
-        this.userId = userId;
+    public LoggedInUser(String displayName, String email, String clientID) {
+        this.email = email;
+        this.clientID = clientID;
         this.displayName = displayName;
-        //de modificat acest bullshit :))))))
-        address = "acasa";
     }
 
-    public LoggedInUser(String userId, String displayName, String address) {
-        this.userId = userId;
-        this.displayName = displayName;
-        this.address = address;
-    }
-
-    public String getUserId() {
-        return userId;
+    public String getClientID() {
+        return clientID;
     }
 
     public String getDisplayName() {
         return displayName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEmail() {
+        return email;
     }
 }

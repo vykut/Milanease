@@ -9,14 +9,12 @@ public class Contract implements Parcelable {
     private String providerID;
     private String clientID;
     private String clientName;
-    private String clientAddress;
 
-    public Contract(String name, String providerID, String clientID, String clientName, String clientAddress) {
+    public Contract(String name, String providerID, String clientID, String clientName) {
         this.name = name;
         this.providerID = providerID;
         this.clientID = clientID;
         this.clientName = clientName;
-        this.clientAddress = clientAddress;
     }
 
     public Contract(Parcel in) {
@@ -24,7 +22,6 @@ public class Contract implements Parcelable {
         providerID = in.readString();
         clientID = in.readString();
         clientName = in.readString();
-        clientAddress = in.readString();
     }
 
     public static final Creator<Contract> CREATOR = new Creator<Contract>() {
@@ -54,6 +51,5 @@ public class Contract implements Parcelable {
         dest.writeString(providerID);
         dest.writeString(clientID);
         dest.writeString(clientName);
-        dest.writeString(clientAddress);
     }
 }

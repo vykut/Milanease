@@ -9,8 +9,6 @@ import java.util.List;
  */
 class LoggedInUserView {
     private String displayName;
-    private List<Provider> providers;
-    //... other data fields that may be accessible to the UI
 
     LoggedInUserView(String displayName) {
         this.displayName = displayName;
@@ -18,9 +16,5 @@ class LoggedInUserView {
 
     public String getDisplayName() {
         return displayName;
-    }
-
-    public List<Provider> getProviders() {
-        return providers;
     }
 }
