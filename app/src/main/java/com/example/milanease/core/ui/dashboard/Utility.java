@@ -1,7 +1,5 @@
 package com.example.milanease.core.ui.dashboard;
 
-import android.graphics.Color;
-
 import com.example.milanease.R;
 
 import java.util.Random;

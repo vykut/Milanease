@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.milanease.R;
-import com.example.milanease.data.model.Contract;
 import com.example.milanease.data.model.Provider;
 import com.example.milanease.data.viewmodel.ProviderActivityViewModel;
 

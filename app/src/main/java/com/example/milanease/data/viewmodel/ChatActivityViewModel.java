@@ -16,7 +16,6 @@ import com.example.milanease.data.model.Provider;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 public class ChatActivityViewModel extends ViewModel {

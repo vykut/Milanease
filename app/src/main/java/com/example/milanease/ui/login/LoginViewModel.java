@@ -79,15 +79,13 @@ public class LoginViewModel extends ViewModel {
         login.setValue(false);
     }
 
-    public void stopRegistrationProcess() {
-        login.setValue(true);
-    }
+    public void stopRegistrationProcess() { login.setValue(true); }
 
     public void registrationDataChanged(String username, String password, String passwordRepeated, String email, String clientID) {
         if (!passwordsMatch(password, passwordRepeated))
-            registerFormState.setValue(new RegisterFormState(R.string.invalid_email, null, null));
+            registerFormState.setValue(new RegisterFormState(R.string.passwords_dont_match, null, null));
         else if (!isUserEmailValid(email))
-            registerFormState.setValue(new RegisterFormState(null, R.string.passwords_dont_match, null));
+            registerFormState.setValue(new RegisterFormState(null, R.string.invalid_email, null));
         else if (!isClientIDValid(clientID))
             registerFormState.setValue(new RegisterFormState(null, null, R.string.invalid_client_id));
         else
@@ -108,11 +106,7 @@ public class LoginViewModel extends ViewModel {
         if (email == null) {
             return false;
         }
-        if (email.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-        } else {
-            return !email.trim().isEmpty();
-        }
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     // A placeholder password validation check

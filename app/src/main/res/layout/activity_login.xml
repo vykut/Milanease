@@ -24,9 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="65dp"
-
         android:layout_marginEnd="24dp"
         android:hint="@string/prompt_email"
+        android:imeOptions="actionDone"
+        android:inputType="textPersonName"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,10 +40,8 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-
-        android:hint="@string/prompt_password"
-        android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
+        android:hint="@string/prompt_password"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,22 +65,6 @@
         app:layout_constraintTop_toBottomOf="@+id/activity_login_client_id"
         app:layout_constraintVertical_bias="0.2" />
 
-    <ProgressBar
-        android:id="@+id/activity_login_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/activity_login_password"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/activity_login_password"
-        app:layout_constraintTop_toBottomOf="@+id/activity_login_btn_login" />
-
     <EditText
         android:id="@+id/activity_login_email"
         android:layout_width="0dp"
@@ -92,6 +75,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:ems="10"
+        android:imeOptions="actionDone"
         android:hint="@string/activity_login_email"
         android:inputType="textEmailAddress"
         android:visibility="gone"
@@ -108,6 +92,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
+        android:imeOptions="actionDone"
         android:ems="10"
         android:hint="@string/activity_login_client_id"
         android:inputType="number"
@@ -125,6 +110,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
+        android:imeOptions="actionDone"
         android:ems="10"
         android:hint="@string/activity_login_repeat_password"
         android:inputType="textPassword"
@@ -144,5 +130,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/activity_login_btn_sign_in_instead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_login_sign_in_instead"
+        app:layout_constraintEnd_toEndOf="@+id/activity_login_btn_login"
+        app:layout_constraintStart_toStartOf="@+id/activity_login_btn_login"
+        app:layout_constraintTop_toBottomOf="@+id/activity_login_btn_login"
+        tools:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

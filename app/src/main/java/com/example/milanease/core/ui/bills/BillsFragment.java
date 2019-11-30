@@ -1,14 +1,9 @@
 package com.example.milanease.core.ui.bills;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,8 +17,6 @@ import com.example.milanease.core.ui.dashboard.SegmentedControl;
 import com.example.milanease.core.ui.dashboard.Utility;
 import com.example.milanease.data.model.Bill;
 import com.example.milanease.data.viewmodel.BillsViewModel;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

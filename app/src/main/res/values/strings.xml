@@ -42,4 +42,5 @@
     <string name="passwords_dont_match">Passwords don\'t match</string>
     <string name="login_activity_register">Register</string>
     <string name="login_activity_registration_form">Registration form</string>
+    <string name="activity_login_sign_in_instead">SIGN IN INSTEAD</string>
 </resources>

@@ -39,7 +39,6 @@ public class Bill implements Comparable<Bill> {
 
     public String getDueDate() {
         period.roll(Calendar.MONTH, true);
-        String s = period.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         String dueDate = period.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
         period.roll(Calendar.MONTH, false);
         return dueDate;

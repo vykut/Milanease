@@ -5,10 +5,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.Nullable;
 
-import com.example.milanease.R;
 import com.example.milanease.core.ui.dashboard.Utility;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Provider implements Comparable<Provider>, Parcelable {

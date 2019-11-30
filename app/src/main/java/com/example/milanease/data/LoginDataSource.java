@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 
 import com.example.milanease.data.model.LoggedInUser;
 
-import java.io.IOException;
-
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
@@ -25,7 +23,7 @@ public class LoginDataSource {
         try {
             int savedUsername = sharedPref.getInt(USERNAME, 0);
             if (savedUsername != username.hashCode())
-                throw new UsernameException();
+                throw new UsernameException("User does not exist");
             int savedPassword = sharedPref.getInt(PASSWORD,0);
             if (password.hashCode() != savedPassword)
                 throw new PasswordException();

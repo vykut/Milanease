@@ -13,10 +13,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.milanease.R;
 import com.example.milanease.core.ui.dashboard.widgets.TodayUsageWidget;
-import com.google.gson.internal.Primitives;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class TodayUsage extends ConstraintLayout {
 

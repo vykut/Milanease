@@ -16,13 +16,11 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.milanease.R;
 import com.example.milanease.core.MainActivity;
-import com.example.milanease.data.PasswordException;
 import com.example.milanease.data.UsernameException;
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText;
     private EditText clientIDEditText;
     private Button loginButton;
-    private ProgressBar loadingProgressBar;
 
     //stop registration process
     private Button backToLoginButton;
@@ -54,20 +51,25 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-
-                    //set title
                     title.setText(R.string.activity_login_login);
 
                     passwordRepeatEditText.setVisibility(View.GONE);
                     emailEditText.setVisibility(View.GONE);
                     clientIDEditText.setVisibility(View.GONE);
+                    backToLoginButton.setVisibility(View.GONE);
+
+                    passwordEditText.removeTextChangedListener(registrationTextChangedListener);
                 } else {
                     title.setText(R.string.login_activity_registration_form);
                     loginButton.setEnabled(aBoolean);
                     loginButton.setText(R.string.login_activity_register);
+                    backToLoginButton.setVisibility(View.VISIBLE);
                     passwordRepeatEditText.setVisibility(View.VISIBLE);
                     emailEditText.setVisibility(View.VISIBLE);
                     clientIDEditText.setVisibility(View.VISIBLE);
+
+                    passwordEditText.addTextChangedListener(registrationTextChangedListener);
+
                 }
             }
         });
@@ -112,7 +114,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult == null) {
                     return;
                 }
-                loadingProgressBar.setVisibility(View.GONE);
 
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError().getLocalizedMessage());
@@ -123,11 +124,8 @@ public class LoginActivity extends AppCompatActivity {
                     updateUiWithUser(loginResult.getSuccess());
                     setResult(Activity.RESULT_OK);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
                 }
-
-                //Complete and destroy login activity once successful
-
-//                finish();
             }
         });
 
@@ -177,10 +175,10 @@ public class LoginActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.activity_login_username);
         passwordEditText = findViewById(R.id.activity_login_password);
         loginButton = findViewById(R.id.activity_login_btn_login);
-        loadingProgressBar = findViewById(R.id.activity_login_progress_bar);
         passwordRepeatEditText = findViewById(R.id.activity_login_password_repeat);
         emailEditText = findViewById(R.id.activity_login_email);
         clientIDEditText = findViewById(R.id.activity_login_client_id);
+        backToLoginButton = findViewById(R.id.activity_login_btn_sign_in_instead);
 
         usernameEditText.addTextChangedListener(loginTextChangedListener);
         passwordEditText.addTextChangedListener(loginTextChangedListener);
@@ -188,10 +186,10 @@ public class LoginActivity extends AppCompatActivity {
         emailEditText.addTextChangedListener(registrationTextChangedListener);
         clientIDEditText.addTextChangedListener(registrationTextChangedListener);
 
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
                 if (loginViewModel.getLogin().getValue())
                     loginViewModel.login(usernameEditText.getText().toString(), passwordEditText.getText().toString(), getApplicationContext());
                 else
@@ -199,11 +197,17 @@ public class LoginActivity extends AppCompatActivity {
                             emailEditText.getText().toString(), clientIDEditText.getText().toString(), getApplicationContext());
             }
         });
+
+        backToLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginViewModel.stopRegistrationProcess();
+            }
+        });
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
