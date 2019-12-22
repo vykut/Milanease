@@ -51,36 +51,36 @@ public class ChatBot {
 
         if (message.getMessage().contains(BILL_TOTAL))
             if (provider.getContract() != null)
-                messages.add(new Message(provider.getID(), getBillTotal(), MessageState.received));
+                messages.add(new Message(provider.getId(), getBillTotal(), MessageState.received));
             else //to add reponse from new contract
-                messages.add(new Message(provider.getID(), "You don't have a contract with us.", MessageState.received));
+                messages.add(new Message(provider.getId(), "You don't have a contract with us.", MessageState.received));
 
         if (message.getMessage().contains(CONTRACT_NEW)) {
             if (provider.getContract() != null)
-                messages.add(new Message(provider.getID(), "You already have a contract.", MessageState.received));
+                messages.add(new Message(provider.getId(), "You already have a contract.", MessageState.received));
             else
-                messages.add(new Message(provider.getID(), "If you'd like to make a new contract, please go back to the previous screen and press the + button.", MessageState.received));
+                messages.add(new Message(provider.getId(), "If you'd like to make a new contract, please go back to the previous screen and press the + button.", MessageState.received));
         }
 
         if (message.getMessage().contains(CHANGE_CONTRACT_TERMS))
             if (provider.getContract() != null)
-                messages.add(new Message(provider.getID(), String.format("If you have any inquiries about your current contract or would like to add new options, please call us at the following phone number: %s.", provider.getPhone()), MessageState.received));
+                messages.add(new Message(provider.getId(), String.format("If you have any inquiries about your current contract or would like to add new options, please call us at the following phone number: %s.", provider.getPhone()), MessageState.received));
             else {
-                messages.add(new Message(provider.getID(), "You don't have a contract with us.", MessageState.received));
-                messages.add(new Message(provider.getID(), "If you'd like to make a new contract, please go back to the previous screen and press the + button.", MessageState.received));
+                messages.add(new Message(provider.getId(), "You don't have a contract with us.", MessageState.received));
+                messages.add(new Message(provider.getId(), "If you'd like to make a new contract, please go back to the previous screen and press the + button.", MessageState.received));
             }
 
         if (message.getMessage().contains(CONTRACT_STOP))
-            messages.add(new Message(provider.getID(), "One of our employees will get in touch with you soon. We are sorry to see you go!", MessageState.received));
+            messages.add(new Message(provider.getId(), "One of our employees will get in touch with you soon. We are sorry to see you go!", MessageState.received));
 
         if (message.getMessage().contains(ASSISTANCE))
-            messages.add(new Message(provider.getID(), "Dispatching a team to your location. They should arrive shortly.", MessageState.received));
+            messages.add(new Message(provider.getId(), "Dispatching a team to your location. They should arrive shortly.", MessageState.received));
 
         if (message.getMessage().contains(PHONE_NUMBER))
-            messages.add(new Message(provider.getID(), String.format("You can call us at %s, available 24/7.", provider.getPhone()), MessageState.received));
+            messages.add(new Message(provider.getId(), String.format("You can call us at %s, available 24/7.", provider.getPhone()), MessageState.received));
 
         if (message.getMessage().contains(EMAIL))
-            messages.add(new Message(provider.getID(), String.format("You can write us at %s.", provider.getEmail()), MessageState.received));
+            messages.add(new Message(provider.getId(), String.format("You can write us at %s.", provider.getEmail()), MessageState.received));
 
         if (message.getMessage().contains(HELP)) {
             messages.add(getHelp());
@@ -88,7 +88,7 @@ public class ChatBot {
         }
 
         if (message.getMessage().contains(NO)) {
-            messages.add(new Message(provider.getID(), "Have a good day!", MessageState.received));
+            messages.add(new Message(provider.getId(), "Have a good day!", MessageState.received));
             return messages;
         }
         if (message.getMessage().contains(YES)) {
@@ -97,16 +97,16 @@ public class ChatBot {
         }
 
         if (messages.isEmpty()) {
-            messages.add(new Message(provider.getID(), "Sorry, I didn't understand your request.", MessageState.received));
+            messages.add(new Message(provider.getId(), "Sorry, I didn't understand your request.", MessageState.received));
             messages.add(getHelp());
         }
         else
-            messages.add(new Message(provider.getID(), "Is there anything else we can assist you with?", MessageState.received));
+            messages.add(new Message(provider.getId(), "Is there anything else we can assist you with?", MessageState.received));
         return messages;
     }
 
     public Message getHelp() {
-        return new Message(provider.getID(),
+        return new Message(provider.getId(),
                 String.format("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s","Some things you can ask me:", BILL_TOTAL, CONTRACT_NEW, CHANGE_CONTRACT_TERMS, CONTRACT_STOP, ASSISTANCE, PHONE_NUMBER, EMAIL), MessageState.received);
     }
 

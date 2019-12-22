@@ -8,21 +8,22 @@ import com.example.milanease.core.ui.providers.MessageState;
 import java.util.Calendar;
 import java.util.Date;
 
+
 public class Message implements Parcelable, Comparable<Message> {
 
     private String message;
     private Calendar date;
     private MessageState state;
-    private String providerID;
+    private long providerID;
 
-    public Message(String providerID, String message, Calendar date, MessageState state) {
+    public Message(long providerID, String message, Calendar date, MessageState state) {
         this.providerID = providerID;
         this.message = message;
         this.date = date;
         this.state = state;
     }
 
-    public Message(String providerID, String message, MessageState state) {
+    public Message(long providerID, String message, MessageState state) {
         this.providerID = providerID;
         this.message = message;
         this.state = state;
@@ -30,14 +31,14 @@ public class Message implements Parcelable, Comparable<Message> {
     }
 
     public Message(MessageState state) {
-        providerID = "";
+        providerID = 0;
         this.state = state;
         message = "Ciao";
         date = Calendar.getInstance();
     }
 
     public Message(Parcel in) {
-        providerID = in.readString();
+        providerID = in.readLong();
         message = in.readString();
         date = Calendar.getInstance();
         date.setTime(new Date(in.readLong()));
@@ -56,7 +57,7 @@ public class Message implements Parcelable, Comparable<Message> {
         return state;
     }
 
-    public String getProviderID() {
+    public Long getProviderID() {
         return providerID;
     }
 
@@ -79,7 +80,7 @@ public class Message implements Parcelable, Comparable<Message> {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(providerID);
+        dest.writeLong(providerID);
         dest.writeString(message);
         dest.writeLong(date.getTimeInMillis());
         dest.writeString(state.name());

@@ -3,13 +3,40 @@ package com.example.milanease.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Contract implements Parcelable {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.Insert;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "contracts", foreignKeys = {
+        @ForeignKey(entity = Provider.class,
+        parentColumns = "id",
+        childColumns = "provider_id")
+})
+public class Contract implements Parcelable {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private long id;
+    @ColumnInfo(name = "name")
     private String name;
+    @ColumnInfo(name = "provider_id")
     private String providerID;
+    @ColumnInfo(name = "client_id")
     private String clientID;
+    @ColumnInfo(name = "client_name")
     private String clientName;
 
+    public Contract(long id, String name, String providerID, String clientID, String clientName) {
+        this.id = id;
+        this.name = name;
+        this.providerID = providerID;
+        this.clientID = clientID;
+        this.clientName = clientName;
+    }
+
+    @Ignore
     public Contract(String name, String providerID, String clientID, String clientName) {
         this.name = name;
         this.providerID = providerID;
@@ -17,6 +44,7 @@ public class Contract implements Parcelable {
         this.clientName = clientName;
     }
 
+    @Ignore
     public Contract(Parcel in) {
         name = in.readString();
         providerID = in.readString();
@@ -51,5 +79,41 @@ public class Contract implements Parcelable {
         dest.writeString(providerID);
         dest.writeString(clientID);
         dest.writeString(clientName);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProviderID() {
+        return providerID;
+    }
+
+    public void setProviderID(String providerID) {
+        this.providerID = providerID;
+    }
+
+    public String getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(String clientID) {
+        this.clientID = clientID;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 }

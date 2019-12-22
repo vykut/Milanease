@@ -1,19 +1,50 @@
 package com.example.milanease.data.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import com.example.milanease.core.ui.dashboard.Utility;
 
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Bill implements Comparable<Bill> {
 
+
+
+@Entity(tableName = "bills", foreignKeys = {
+        @ForeignKey(entity = Provider.class,
+                parentColumns = "id",
+                childColumns = "provider_id")
+})
+public class Bill implements Comparable<Bill> {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private long id;
+    @ColumnInfo(name = "utility")
     private Utility utility;
+    @ColumnInfo(name = "provider_id")
     private String providerID;
+    @ColumnInfo(name = "price")
     private double price;
+    @ColumnInfo(name = "period")
     private Calendar period;
+    @ColumnInfo(name = "quantity")
     private double quantity;
 
+    @Ignore
     public Bill(Utility utility, String providerID, double price, Calendar period, double quantity) {
+        this.utility = utility;
+        this.providerID = providerID;
+        this.price = price;
+        this.period = period;
+        this.quantity = quantity;
+    }
+
+    public Bill(long id, Utility utility, String providerID, double price, Calendar period, double quantity) {
+        this.id = id;
         this.utility = utility;
         this.providerID = providerID;
         this.price = price;
@@ -87,6 +118,15 @@ public class Bill implements Comparable<Bill> {
     public String getProviderID() {
         return providerID;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 
     @Override
     public int compareTo(Bill o) {

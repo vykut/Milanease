@@ -64,7 +64,7 @@ public class ChatActivityViewModel extends ViewModel {
         if (TextUtils.isGraphic(text)) {
             while (text.charAt(text.length() - 1) == '\n')
                 text = text.substring(0, text.length() - 1);
-            Message message = new Message(provider.getID(), text, Calendar.getInstance(), MessageState.sent);
+            Message message = new Message(provider.getId(), text, Calendar.getInstance(), MessageState.sent);
             addMessage(message);
             addMessages(ChatBot.getInstance().makeReply(message));
         }
@@ -76,7 +76,7 @@ public class ChatActivityViewModel extends ViewModel {
         List<Message> messages = new ArrayList<>();
 
         for (Message message : allMessages)
-            if (message.getProviderID().equals(provider.getID()))
+            if (message.getProviderID().equals(provider.getId()))
                 messages.add(message);
 
         mMessages.setValue(messages);
@@ -89,7 +89,7 @@ public class ChatActivityViewModel extends ViewModel {
 
         for (Utility utility : provider.getUtilities())
             for (Bill bill : allBills)
-                if (bill.getProviderID().equals(provider.getID()) && bill.getUtility().equals(utility)) {
+                if (bill.getProviderID().equals(provider.getId()) && bill.getUtility().equals(utility)) {
                     bills.add(bill);
                     break;
                 }
