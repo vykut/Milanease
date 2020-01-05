@@ -1,9 +1,11 @@
 package com.example.milanease.core.ui.bills;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,12 +17,14 @@ import com.example.milanease.R;
 import com.example.milanease.core.ui.SegmentedControlInterface;
 import com.example.milanease.core.ui.dashboard.SegmentedControl;
 import com.example.milanease.core.ui.dashboard.Utility;
+import com.example.milanease.data.RepositoryManager;
+import com.example.milanease.data.database.DatabaseManager;
 import com.example.milanease.data.model.Bill;
 import com.example.milanease.data.viewmodel.BillsViewModel;
 
 import java.util.List;
 
-public class BillsFragment extends Fragment implements SegmentedControlInterface {
+public class BillsFragment extends Fragment implements SegmentedControlInterface, BillDelegate {
 
     private BillsViewModel billsViewModel;
     private ViewPager billsPager;
@@ -65,7 +69,10 @@ public class BillsFragment extends Fragment implements SegmentedControlInterface
     }
 
     private void initAdapter(final List<Bill> bills) {
+        if (billsAdapter != null)
+            billsAdapter.setBillDelegate(null);
         billsAdapter = new BillPagerAdapter(bills, getContext());
+        billsAdapter.setBillDelegate(this);
         billsPager.setAdapter(billsAdapter);
     }
 
@@ -77,6 +84,14 @@ public class BillsFragment extends Fragment implements SegmentedControlInterface
     @Override
     public void onDestroy() {
         segmentedControl.setDelegate(null);
+        billsAdapter.setBillDelegate(null);
         super.onDestroy();
+    }
+
+    @Override
+    public void download(Bill bill) {
+        //to be implemented
+//        Toast.makeText(getContext(), bill.displayPrice(), Toast.LENGTH_SHORT).show();
+        billsViewModel.saveBillToFile(bill, getContext());
     }
 }

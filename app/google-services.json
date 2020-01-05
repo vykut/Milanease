@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "791429696450",
+    "firebase_url": "https://milanease-e6741.firebaseio.com",
+    "project_id": "milanease-e6741",
+    "storage_bucket": "milanease-e6741.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791429696450:android:2f8a00ec355cdff9b2645b",
+        "android_client_info": {
+          "package_name": "com.example.milanease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791429696450-o48858rr1ttciqrirv03l387buim8brj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.milanease",
+            "certificate_hash": "382e2be6b4a39045d7b375ae109e330950617df0"
+          }
+        },
+        {
+          "client_id": "791429696450-sa7oou1r9ao86b2ek5gctbss66bou1m1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe2wkNYn-IPkz7EwNhvkW-3wARdMo9fvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791429696450-sa7oou1r9ao86b2ek5gctbss66bou1m1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

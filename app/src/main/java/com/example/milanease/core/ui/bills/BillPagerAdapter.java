@@ -20,6 +20,7 @@ public class BillPagerAdapter extends PagerAdapter {
 
     private List<Bill> bills;
     private Context context;
+    private BillDelegate billDelegate;
 
     public BillPagerAdapter(List<Bill> bills, Context context) {
         this.bills = bills;
@@ -71,9 +72,9 @@ public class BillPagerAdapter extends PagerAdapter {
         btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // to be implemented
-//                Toast.makeText(context, bill.displayPrice(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, "To be implemented", Toast.LENGTH_LONG).show();
+                if (billDelegate != null) {
+                    billDelegate.download(bill);
+                }
             }
         });
     }
@@ -81,5 +82,9 @@ public class BillPagerAdapter extends PagerAdapter {
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
+    }
+
+    public void setBillDelegate(BillDelegate billDelegate) {
+        this.billDelegate = billDelegate;
     }
 }

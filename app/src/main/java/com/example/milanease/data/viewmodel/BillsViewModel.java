@@ -1,5 +1,8 @@
 package com.example.milanease.data.viewmodel;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,7 +13,8 @@ import com.example.milanease.data.model.Bill;
 import com.example.milanease.core.ui.dashboard.Utility;
 import com.example.milanease.data.RepositoryManager;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.List;
 
 public class BillsViewModel extends ViewModel {
@@ -41,20 +45,33 @@ public class BillsViewModel extends ViewModel {
         mSegmentedBills = Transformations.switchMap(mUtility, new Function<Utility, LiveData<List<Bill>>>() {
             @Override
             public LiveData<List<Bill>> apply(Utility input) {
-                final Utility utility = input;
-                return Transformations.map(repositoryManager.getBills(), new Function<List<Bill>, List<Bill>>() {
-                    @Override
-                    public List<Bill> apply(List<Bill> input) {
-                        List<Bill> bills = new ArrayList<>();
-                        for (Bill bill : input) {
-                            if (bill.getUtility().equals(utility))
-                                bills.add(bill);
-                        }
-                        return bills;
-                    }
-                });
+                return repositoryManager.getSegmentedBills(input);
             }
         });
+    }
+
+    public void addBill(Bill bill) {
+        repositoryManager.addBill(bill);
+    }
+
+    public void updateBill(Bill bill) {
+        repositoryManager.updateBill(bill);
+    }
+
+    public void deleteBill(Bill bill) {
+        repositoryManager.deleteBill(bill);
+    }
+
+    public void saveBillToFile(Bill bill, Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("bills.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(bill.toString());
+            Toast.makeText(context, "Bill has be written to file", Toast.LENGTH_SHORT).show();
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Toast.makeText(context, "File write failed: " + e.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public MutableLiveData<Utility> getUtility() {

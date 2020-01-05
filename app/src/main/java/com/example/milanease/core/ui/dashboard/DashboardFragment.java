@@ -12,8 +12,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.milanease.R;
 import com.example.milanease.core.ui.SegmentedControlInterface;
+import com.example.milanease.core.ui.dashboard.widgets.TodayUsageWidget;
 import com.example.milanease.data.model.DashboardModel;
 import com.example.milanease.data.viewmodel.DashboardViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardFragment extends Fragment implements SegmentedControlInterface {
 
@@ -22,6 +26,7 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
     private TodayUsage todayUsage;
     private TodayVsYesterdayUsage todayVsYesterdayUsage;
     private CostComparison exchangeCard;
+    private WeeklyUsage weeklyUsage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +51,13 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
             }
         });
 
+        dashboardViewModel.getmWeeklyUsage().observe(getViewLifecycleOwner(), new Observer<List<TodayUsageWidget>>() {
+            @Override
+            public void onChanged(List<TodayUsageWidget> pastWeekUsage) {
+                weeklyUsage.setWeeklyUsage(pastWeekUsage);
+            }
+        });
+
         initComponents(root);
 
 
@@ -60,6 +72,7 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
         todayUsage = view.findViewById(R.id.today_usage);
         todayVsYesterdayUsage = view.findViewById(R.id.today_vs_yesterday);
         exchangeCard = view.findViewById(R.id.exchange_card);
+        weeklyUsage = view.findViewById(R.id.weekly_usage);
     }
 
     private void fetchWidgets(boolean fetch) {
@@ -72,8 +85,19 @@ public class DashboardFragment extends Fragment implements SegmentedControlInter
         todayUsage.updateUI(dashboardModel.getTodayUsageWidget());
         todayVsYesterdayUsage.updateUI(dashboardModel.getTodayVsYesterdayUsageWidget());
         exchangeCard.updateUI(dashboardModel.getCostWidget());
+    }
 
+    private void updateChart(Utility utility) {
+        List<TodayUsageWidget> todayUsageWidgets = new ArrayList<>();
+        todayUsageWidgets.add(new TodayUsageWidget(Utility.water, 10.0, "cubic meters"));
+        todayUsageWidgets.add(new TodayUsageWidget(Utility.water, 15.0, "cubic meters"));
+        todayUsageWidgets.add(new TodayUsageWidget(Utility.water, 20.0, "cubic meters"));
+        todayUsageWidgets.add(new TodayUsageWidget(Utility.water, 25.0, "cubic meters"));
+        todayUsageWidgets.add(new TodayUsageWidget(Utility.water, 30.0, "cubic meters"));
+        todayUsageWidgets.add(new TodayUsageWidget(Utility.water, 35.0, "cubic meters"));
+        todayUsageWidgets.add(new TodayUsageWidget(Utility.water, 40.0, "cubic meters"));
 
+        weeklyUsage.setWeeklyUsage(todayUsageWidgets);
     }
 
     @Override

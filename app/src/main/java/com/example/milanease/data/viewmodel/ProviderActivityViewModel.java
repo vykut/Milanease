@@ -23,9 +23,23 @@ public class ProviderActivityViewModel extends ViewModel {
     }
 
     public void addContract(Contract contract) {
-        Provider provider = mProvider.getValue();
-        provider.addContract(contract);
+
+
+        repositoryManager.addContract(contract);
+    }
+
+    public void addContract(Provider provider) {
+        Contract contract = new Contract(provider.getName() + " Simplu Anual", provider.getId(), repositoryManager.getUserID(), repositoryManager.getUserName());
+        repositoryManager.addContract(provider);
+        provider.setContract(contract);
         mProvider.setValue(provider);
-        repositoryManager.addContract(provider, contract);
+    }
+
+    public void updateContract(Contract contract) {
+        repositoryManager.updateContract(contract);
+    }
+
+    public void deleteContract(Contract contract) {
+        repositoryManager.deleteContract(contract);
     }
 }

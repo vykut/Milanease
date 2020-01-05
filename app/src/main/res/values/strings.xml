@@ -43,4 +43,6 @@
     <string name="login_activity_register">Register</string>
     <string name="login_activity_registration_form">Registration form</string>
     <string name="activity_login_sign_in_instead">SIGN IN INSTEAD</string>
+    <string name="today_vs_yesterday_interpretation">more water than</string>
+    <string name="today_vs_yesterday_percentage">55%</string>
 </resources>

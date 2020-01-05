@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.example.milanease.core.ui.providers.MessageState;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,48 +13,43 @@ import java.util.Date;
 public class Message implements Parcelable, Comparable<Message> {
 
     private String message;
-    private Calendar date;
-    private MessageState state;
+    private Date date;
+    private String state;
     private long providerID;
 
-    public Message(long providerID, String message, Calendar date, MessageState state) {
+    public Message(long providerID, String message, Date date, String state) {
         this.providerID = providerID;
         this.message = message;
         this.date = date;
         this.state = state;
     }
 
-    public Message(long providerID, String message, MessageState state) {
+    public Message(long providerID, String message, String state) {
         this.providerID = providerID;
         this.message = message;
         this.state = state;
-        date = Calendar.getInstance();
-    }
-
-    public Message(MessageState state) {
-        providerID = 0;
-        this.state = state;
-        message = "Ciao";
-        date = Calendar.getInstance();
+        date = new Date();
     }
 
     public Message(Parcel in) {
         providerID = in.readLong();
         message = in.readString();
-        date = Calendar.getInstance();
-        date.setTime(new Date(in.readLong()));
-        state = MessageState.valueOf(in.readString());
+        date = new Date(in.readLong());
+        state = in.readString();
+    }
+
+    public Message() {
     }
 
     public String getMessage() {
         return message;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public MessageState getState() {
+    public String getState() {
         return state;
     }
 
@@ -82,8 +78,8 @@ public class Message implements Parcelable, Comparable<Message> {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(providerID);
         dest.writeString(message);
-        dest.writeLong(date.getTimeInMillis());
-        dest.writeString(state.name());
+        dest.writeLong(date.getTime());
+        dest.writeString(state);
     }
 
     @Override

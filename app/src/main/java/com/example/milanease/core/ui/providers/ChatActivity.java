@@ -75,14 +75,10 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void initAdaper(final List<Message> messages) {
-        if (messageAdapter == null) {
-            messageAdapter = new MessageAdapter(chatActivityViewModel.getMessages().getValue(), getApplicationContext());
-            recyclerView.setAdapter(messageAdapter);
-        } else {
-            messageAdapter.notifyDataSetChanged();
-        }
-//        recyclerView.scrollToPosition(messages.size() - 1);
-        recyclerView.smoothScrollToPosition(messages.size() - 1);
+        messageAdapter = new MessageAdapter(messages, getApplicationContext());
+        recyclerView.setAdapter(messageAdapter);
+        recyclerView.scrollToPosition(messages.size() - 1 > 0 ? messages.size() - 1 : 0);
+//        recyclerView.smoothScrollToPosition(messages.size() - 1 > 0 ? messages.size() - 1 : 0);
     }
 
     private void initUI(final Provider provider) {

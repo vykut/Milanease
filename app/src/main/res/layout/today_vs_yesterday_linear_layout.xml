@@ -56,7 +56,7 @@
                     android:layout_weight="1"
                     android:textSize="50sp"
                     android:textStyle="bold"
-                    tools:text="55%" />
+                    tools:text="@string/today_vs_yesterday_percentage" />
 
                 <ImageView
                     android:id="@+id/today_vs_yesterday_up_down"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:textSize="18sp"
-                tools:text="more water than" />
+                tools:text="@string/today_vs_yesterday_interpretation" />
 
             <TextView
                 android:id="@+id/today_vs_yesterday_yesterday"

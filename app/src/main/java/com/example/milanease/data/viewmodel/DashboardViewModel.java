@@ -7,6 +7,7 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.example.milanease.core.ui.dashboard.Utility;
+import com.example.milanease.core.ui.dashboard.widgets.TodayUsageWidget;
 import com.example.milanease.data.RepositoryManager;
 import com.example.milanease.data.model.DashboardModel;
 
@@ -17,6 +18,7 @@ public class DashboardViewModel extends ViewModel {
     private LiveData<DashboardModel> mDashboardModel;
     private MutableLiveData<Boolean> mIsFetching;
     private MutableLiveData<Utility> mUtility;
+    private LiveData<List<TodayUsageWidget>> mWeeklyUsage;
     private RepositoryManager repositoryManager = RepositoryManager.getInstance();
 
     public void init(Utility utility) {
@@ -47,6 +49,13 @@ public class DashboardViewModel extends ViewModel {
             }
         });
 
+        mWeeklyUsage = Transformations.switchMap(mUtility, new Function<Utility, LiveData<List<TodayUsageWidget>>>() {
+            @Override
+            public LiveData<List<TodayUsageWidget>> apply(Utility input) {
+                return repositoryManager.getWeeklyUsage(input);
+            }
+        });
+
         fetchDashboardModel();
     }
 
@@ -71,5 +80,9 @@ public class DashboardViewModel extends ViewModel {
 
     public LiveData<Utility> getUtility() {
         return mUtility;
+    }
+
+    public LiveData<List<TodayUsageWidget>> getmWeeklyUsage() {
+        return mWeeklyUsage;
     }
 }

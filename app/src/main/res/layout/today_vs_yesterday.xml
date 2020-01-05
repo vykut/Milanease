@@ -70,7 +70,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-                        tools:text="more water than" />
+                        tools:text="@string/today_vs_yesterday_interpretation" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline"

@@ -37,15 +37,17 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         @SuppressLint("DefaultLocale")
         public void setMessage(Message message) {
-            if (message.getState() == MessageState.received)
+            if (message.getState().equals(MessageState.received.toString()))
                 linearLayout.setGravity(Gravity.START);
             else
                 linearLayout.setGravity(Gravity.END);
 
             this.message.setText(message.getMessage());
-            this.time.setText(String.format("%d:%d %s %d %s", message.getDate().get(Calendar.HOUR_OF_DAY), message.getDate().get(Calendar.MINUTE),
-                    message.getDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()),
-                    message.getDate().get(Calendar.DAY_OF_MONTH), message.getDate().getDisplayName(Calendar.MONTH, Calendar.SHORT,
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(message.getDate().getTime());
+            this.time.setText(String.format("%d:%d %s %d %s", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
+                    calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()),
+                    calendar.get(Calendar.DAY_OF_MONTH), calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT,
                             Locale.getDefault())));
         }
     }

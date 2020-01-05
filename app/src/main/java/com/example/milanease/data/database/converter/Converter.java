@@ -23,7 +23,14 @@ public class Converter {
 
     @TypeConverter
     public static String fromUtilities(List<Utility> utilities) {
-        return utilities.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Utility utility:
+             utilities) {
+            stringBuilder.append(utility.toString());
+            stringBuilder.append(",");
+        }
+
+        return stringBuilder.toString();
     }
 
     @TypeConverter

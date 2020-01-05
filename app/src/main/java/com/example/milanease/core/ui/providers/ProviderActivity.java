@@ -102,7 +102,11 @@ public class ProviderActivity extends AppCompatActivity {
         btnContract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "To be implemented", Toast.LENGTH_LONG).show();
+                if (provider.getContract() == null) {
+                    providerActivityViewModel.addContract(provider);
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "To be implemented", Toast.LENGTH_LONG).show();
             }
         });
 

@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import com.example.milanease.core.ui.bills.BillsFragment;
 import com.example.milanease.core.ui.dashboard.DashboardFragment;
 import com.example.milanease.core.ui.providers.ProvidersFragment;
+import com.example.milanease.data.RepositoryManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -27,12 +28,14 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         reloadInstance(savedInstanceState);
+
+        RepositoryManager.getInstance().initDB(getApplicationContext());
     }
 
     private void reloadInstance(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             selectedFragment = new DashboardFragment();
-            setActionBarTitle("Dashboard");
+            setActionBarTitle(getString(R.string.dashboard_tab));
             getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,
                     selectedFragment).commit();
         }
@@ -48,15 +51,15 @@ public class MainActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.tab_bills:
                             selectedFragment = new BillsFragment();
-                            setActionBarTitle("Bills");
+                            setActionBarTitle(getString(R.string.bills_tab));
                             break;
                         case R.id.tab_providers:
                             selectedFragment = new ProvidersFragment();
-                            setActionBarTitle("Providers");
+                            setActionBarTitle(getString(R.string.providers_tab));
                             break;
                         case R.id.tab_dashboard:
                             selectedFragment = new DashboardFragment();
-                            setActionBarTitle("Dashboard");
+                            setActionBarTitle(getString(R.string.dashboard_tab));
                             break;
                     }
 

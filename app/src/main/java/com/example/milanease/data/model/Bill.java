@@ -26,7 +26,7 @@ public class Bill implements Comparable<Bill> {
     @ColumnInfo(name = "utility")
     private Utility utility;
     @ColumnInfo(name = "provider_id")
-    private String providerID;
+    private long providerID;
     @ColumnInfo(name = "price")
     private double price;
     @ColumnInfo(name = "period")
@@ -35,7 +35,7 @@ public class Bill implements Comparable<Bill> {
     private double quantity;
 
     @Ignore
-    public Bill(Utility utility, String providerID, double price, Calendar period, double quantity) {
+    public Bill(Utility utility, long providerID, double price, Calendar period, double quantity) {
         this.utility = utility;
         this.providerID = providerID;
         this.price = price;
@@ -43,7 +43,7 @@ public class Bill implements Comparable<Bill> {
         this.quantity = quantity;
     }
 
-    public Bill(long id, Utility utility, String providerID, double price, Calendar period, double quantity) {
+    public Bill(long id, Utility utility, long providerID, double price, Calendar period, double quantity) {
         this.id = id;
         this.utility = utility;
         this.providerID = providerID;
@@ -115,7 +115,7 @@ public class Bill implements Comparable<Bill> {
         return utility;
     }
 
-    public String getProviderID() {
+    public Long getProviderID() {
         return providerID;
     }
 

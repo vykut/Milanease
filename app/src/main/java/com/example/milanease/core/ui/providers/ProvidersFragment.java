@@ -1,10 +1,12 @@
 package com.example.milanease.core.ui.providers;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.milanease.R;
+import com.example.milanease.data.database.DatabaseManager;
+import com.example.milanease.data.model.Contract;
 import com.example.milanease.data.model.Provider;
 import com.example.milanease.data.viewmodel.ProvidersFragmentViewModel;
 

@@ -22,13 +22,13 @@ public class Contract implements Parcelable {
     @ColumnInfo(name = "name")
     private String name;
     @ColumnInfo(name = "provider_id")
-    private String providerID;
+    private long providerID;
     @ColumnInfo(name = "client_id")
     private String clientID;
     @ColumnInfo(name = "client_name")
     private String clientName;
 
-    public Contract(long id, String name, String providerID, String clientID, String clientName) {
+    public Contract(long id, String name, long providerID, String clientID, String clientName) {
         this.id = id;
         this.name = name;
         this.providerID = providerID;
@@ -37,7 +37,7 @@ public class Contract implements Parcelable {
     }
 
     @Ignore
-    public Contract(String name, String providerID, String clientID, String clientName) {
+    public Contract(String name, long providerID, String clientID, String clientName) {
         this.name = name;
         this.providerID = providerID;
         this.clientID = clientID;
@@ -46,8 +46,9 @@ public class Contract implements Parcelable {
 
     @Ignore
     public Contract(Parcel in) {
+        id = in.readLong();
         name = in.readString();
-        providerID = in.readString();
+        providerID = in.readLong();
         clientID = in.readString();
         clientName = in.readString();
     }
@@ -75,8 +76,9 @@ public class Contract implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
         dest.writeString(name);
-        dest.writeString(providerID);
+        dest.writeLong(providerID);
         dest.writeString(clientID);
         dest.writeString(clientName);
     }
@@ -93,11 +95,11 @@ public class Contract implements Parcelable {
         this.name = name;
     }
 
-    public String getProviderID() {
+    public long getProviderID() {
         return providerID;
     }
 
-    public void setProviderID(String providerID) {
+    public void setProviderID(long providerID) {
         this.providerID = providerID;
     }
 

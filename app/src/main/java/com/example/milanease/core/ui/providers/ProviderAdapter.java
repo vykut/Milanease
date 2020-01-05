@@ -80,7 +80,6 @@ public class ProviderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemViewType(int position) {
-
         if (providers.get(position).getLogoLarge() == 0)
             return SECTION;
 
@@ -111,7 +110,6 @@ public class ProviderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     delegate.providerClicked(providers.get(position));
                 }
             });
-
         }
     }
 
